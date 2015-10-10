@@ -8,13 +8,13 @@
     <color name="ColorPrimary">#37474F</color>
     <color name="ColorPrimaryDark">#263238</color>
     <color name="tabsScrollColor">#607D8B</color>
-    <color name="colorAccent">#FF5722</color>
+    <color name="colorAccent">#E91E63</color>
 
     <color name="colortab0">@color/white</color>
     <color name="colortab1">#F8BBD0</color>
     <color name="colortab3">#F48FB1</color>
     <color name="colortab5">#F06292</color>
     <color name="colortab7">#EC407A</color>
-    <color name="colortab9">#E91E63</color>
+    <color name="colortab9">@color/colorAccent</color>
 
 </resources>

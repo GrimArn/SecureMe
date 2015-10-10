@@ -10,6 +10,7 @@ apply plugin: 'com.android.application'
 
 repositories {
     jcenter()
+    mavenCentral()
 }
 
 android {
@@ -51,4 +52,6 @@ dependencies {
     compile 'org.codehaus.jackson:jackson-core-asl:1.1.0'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.0.1'
     compile 'com.android.support:design:22.2.0'
+    compile 'com.github.machinarius:preferencefragment:0.1.1'
+
 }

@@ -9,4 +9,4 @@
           android:layout_centerVertical="true"
           android:layout_centerHorizontal="true"
           android:gravity="center_horizontal"
-        android:backgroundTint="@color/red"/>
+        android:backgroundTint="@color/red" android:id="@+id/tabicon"/>

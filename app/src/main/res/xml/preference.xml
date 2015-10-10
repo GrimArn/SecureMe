@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+            android:title="@string/pref_emer_contact"
+            android:key="pref_key_emer_contact">
+        <EditTextPreference
+                android:key="pref_key_emer_num"
+                android:summary="@string/pref_summary_emer_num"
+                android:title="@string/pref_title_emer_num"
+                />
+        <EditTextPreference
+                android:key="pref_key_emer_text"
+                android:summary="@string/pref_summary_emer_text"
+                android:title="@string/pref_title_emer_text"
+                android:icon="@drawable/ic_wifi_tethering_black_36dp"
+                />
+    </PreferenceCategory>
+</PreferenceScreen>

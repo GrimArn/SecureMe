@@ -5,4 +5,9 @@
     <color name="red">#ffcc0000</color>
     <color name="green">#ff1ecc00</color>
     <color name="yellow">#ffc6cc00</color>
+    <color name="ColorPrimary">#37474F</color>
+    <color name="ColorPrimaryDark">#263238</color>
+    <color name="tabsScrollColor">#607D8B</color>
+    <color name="colorAccent">#FF5722</color>
+
 </resources>

@@ -2,13 +2,11 @@
 
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimaryDark">#263238</item>
-        <item name="colorPrimary">#37474F</item>
-
+        <item name="colorPrimaryDark">@color/ColorPrimaryDark</item>
+        <item name="colorPrimary">@color/ColorPrimary</item>
         <item name="android:actionBarStyle">@style/AppTheme.ActionBarStyle</item>
-        <!--19b5fe-->
-        <!--<item name="colorPrimaryDark">#ff89C4F4</item>-->
-        <item name="colorAccent">#FF5722</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="AppTheme.ActionBarStyle"  parent="Theme.AppCompat.Light">

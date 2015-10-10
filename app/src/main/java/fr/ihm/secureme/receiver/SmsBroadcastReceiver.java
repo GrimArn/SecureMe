@@ -1,4 +1,4 @@
-package fr.ihm.secureme;
+package fr.ihm.secureme.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -37,7 +37,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver{
                     toast.show();
 
                     Intent intent1 = new Intent();
-                    intent1.setClassName("fr.ihm.secureme", "fr.ihm.secureme.AlarmActivity");
+                    intent1.setClassName("fr.ihm.secureme", "fr.ihm.secureme.activity.AlarmActivity");
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent1);
 

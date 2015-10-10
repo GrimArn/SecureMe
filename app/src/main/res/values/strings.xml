@@ -4,4 +4,10 @@
     <string name="hello_world">Ceci est un test</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_alarm">AlarmActivity</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_settings_fragment">settings</string>
+    <string name="hello_alert_fragment">alert</string>
+    <string name="hello_contact_fragment">contact</string>
 </resources>

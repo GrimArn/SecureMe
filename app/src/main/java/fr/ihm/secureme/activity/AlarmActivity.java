@@ -1,10 +1,11 @@
-package fr.ihm.secureme;
+package fr.ihm.secureme.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
+import fr.ihm.secureme.R;
 
 import java.util.Timer;
 import java.util.TimerTask;

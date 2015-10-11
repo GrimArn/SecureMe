@@ -3,6 +3,7 @@ package fr.ihm.secureme.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class ContactFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_contact, container, false);
+        Log.e(TAG, "coucou");
         listView = (ListView) mView.findViewById(R.id.card_listView);
 
         listView.addHeaderView(new View(getActivity()));
@@ -45,6 +47,39 @@ public class ContactFragment extends Fragment {
         mContactArrayAdapter.add(contact);
         contact = new Contact("0657815637", "STOLE", false);
         mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact); contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+        contact = new Contact("0657815637", "STOLE", false);
+        mContactArrayAdapter.add(contact);
+
+        Log.e(TAG, "test on num " + contact.getNum());
         listView.setAdapter(mContactArrayAdapter);
         return mView;
     }

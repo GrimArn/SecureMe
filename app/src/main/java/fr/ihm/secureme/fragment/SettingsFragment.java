@@ -14,8 +14,10 @@ import fr.ihm.secureme.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends PreferenceFragment{
 
+
+    public static CharSequence sTitle = "Paramètres";
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -26,6 +28,4 @@ public class SettingsFragment extends PreferenceFragment {
         super.onCreate(paramBundle);
         addPreferencesFromResource(R.xml.preference);
     }
-
-
 }

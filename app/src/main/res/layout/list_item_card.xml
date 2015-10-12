@@ -24,7 +24,8 @@
                     android:id="@+id/num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Text line 1" android:textStyle="bold" android:textSize="18dp"/>
+                    android:text="Text line 1" android:textStyle="bold" android:textSize="18dp"
+                    android:textColor="@color/primary_dark_text"/>
             <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="fill_parent"
@@ -33,6 +34,7 @@
                         android:id="@+id/message"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:textColor="@color/secondary_dark_text"
                         android:text="Text line 2"/>
             </LinearLayout>
         </LinearLayout>

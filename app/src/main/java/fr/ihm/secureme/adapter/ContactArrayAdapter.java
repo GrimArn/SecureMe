@@ -20,7 +20,7 @@ import fr.ihm.secureme.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactArrayAdapter extends ArrayAdapter<Contact> {
+public class ContactArrayAdapter extends ArrayAdapter<Contact>{
     private static final String TAG = "ContactArrayAdapter";
     private List<Contact> mContactArrayList = new ArrayList<Contact>();
     private View mRow;
@@ -83,12 +83,12 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact> {
                 deleteView(position);
             }
         });
-        mCardView.setOnLongClickListener(new View.OnLongClickListener() {
+        /*mCardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 return false;
             }
-        });
+        });*/
         return mRow;
     }
 

@@ -36,6 +36,7 @@ import android.widget.TextView;
 
 class SlidingTabStrip extends LinearLayout {
 
+    private static final String TAG = "SlidingTabStrip";
     private int[] imageResId = {
             fr.ihm.secureme.R.drawable.ic_error_outline_white_24dp,
             fr.ihm.secureme.R.drawable.ic_wifi_tethering_white_24dp,
@@ -121,7 +122,28 @@ class SlidingTabStrip extends LinearLayout {
         mSelectedPosition = position;
         mSelectionOffset = positionOffset;
         invalidate();
+        Log.e(TAG, position + " + " + positionOffset);
+        TextView tv0 = (TextView) getChildAt(0);
+        TextView tv1 = (TextView) getChildAt(1);
+        TextView tv2 = (TextView) getChildAt(2);
+        if (mSelectionOffset < 0.3f) {
+            switch (mSelectedPosition) {
+                case 0:
+                    tv1.setText(getIcon(0, 1));
+                    tv2.setText(getIcon(0, 2));
+                    break;
+                case 2:
+                    tv0.setText(getIcon(0, 0));
+                    tv1.setText(getIcon(0, 1));
+                    break;
+                case 1:
+                    tv0.setText(getIcon(0, 0));
+                    tv2.setText(getIcon(0, 2));
+                    break;
+            }
+        }
     }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -136,7 +158,6 @@ class SlidingTabStrip extends LinearLayout {
         // Thick colored underline below the current selection
         if (childCount > 0) {
             View selectedTitle = getChildAt(mSelectedPosition);
-
             TextView tv = (TextView) selectedTitle;
             tv.setText(getIcon(10, mSelectedPosition));
             int left = selectedTitle.getLeft();
@@ -162,6 +183,7 @@ class SlidingTabStrip extends LinearLayout {
 
             mSelectedIndicatorPaint.setColor(color);
 
+//            tv.setText(getIcon(0, mSelectedPosition));
             /*canvas.drawRect(left, height - mSelectedIndicatorThickness, right,
                     height, mSelectedIndicatorPaint);*/
         }

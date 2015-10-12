@@ -13,6 +13,8 @@ import fr.ihm.secureme.R;
 public class AlertFragment extends Fragment {
 
 
+    public static CharSequence sTitle = "Modes de déclenchement";
+
     public AlertFragment() {
         // Required empty public constructor
     }
@@ -23,6 +25,4 @@ public class AlertFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_alert, container, false);
     }
-
-
 }

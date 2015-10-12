@@ -24,6 +24,8 @@ public class ContactFragment extends Fragment {
     private ContactArrayAdapter mContactArrayAdapter;
     private ListView listView;
     private View mView;
+    public static CharSequence sTitle = "Contacts d'urgence";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,44 +47,9 @@ public class ContactFragment extends Fragment {
         mContactArrayAdapter.add(contact);
         contact = new Contact("0657815637", "STOLE", false);
         mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact); contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
-        contact = new Contact("0657815637", "STOLE", false);
-        mContactArrayAdapter.add(contact);
 
         Log.e(TAG, "test on num " + contact.getNum());
         listView.setAdapter(mContactArrayAdapter);
         return mView;
     }
-
-
 }

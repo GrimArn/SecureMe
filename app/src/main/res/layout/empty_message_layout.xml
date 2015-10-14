@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:layout_gravity="center"
+            android:gravity="center_vertical" android:id="@+id/ll_empty">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Votre liste de contact est vide"
+                android:id="@+id/textView2" android:gravity="fill_horizontal|center_vertical"
+                android:layout_gravity="center" android:textColor="@color/hint_disable_dark"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="En cas de perte ou de vol, ces contacts pourront verrouiller votre téléphone à distance"
+                android:id="@+id/textView3" android:layout_gravity="center" android:padding="4dp"
+                android:gravity="center_horizontal" android:textColor="@color/hint_disable_dark"/>
+    </LinearLayout>

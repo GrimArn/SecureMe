@@ -1,0 +1,12 @@
+package fr.ihm.secureme.callback;
+
+import fr.ihm.secureme.Contact;
+
+/**
+ * Created by nonau on 12/10/15.
+ */
+public interface ContactFragmentInterface {
+    void deleteEvent(int itemCount);
+    void dialogCallBackHandler(Contact c);
+    void dialogCancelHandler();
+}

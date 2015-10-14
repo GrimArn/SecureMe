@@ -32,14 +32,15 @@ public class SmsBroadcastReceiver extends BroadcastReceiver{
                     String phoneNumber = currentMessage.getDisplayOriginatingAddress();
                     String senderNum = phoneNumber;
                     String message = currentMessage.getDisplayMessageBody();
+                    if (message.equals("BANANA")) {
+                        Toast toast = Toast.makeText(context, "Message reçu de : " + senderNum + " message : " + message, Toast.LENGTH_LONG);
+                        toast.show();
+                        Intent intent1 = new Intent();
+                        intent1.setClassName("fr.ihm.secureme", "fr.ihm.secureme.activity.AlarmActivity");
+                        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent1);
+                    }
 
-                    Toast toast = Toast.makeText(context, "Message reçu de : " + senderNum + " message : " + message, Toast.LENGTH_LONG);
-                    toast.show();
-
-                    Intent intent1 = new Intent();
-                    intent1.setClassName("fr.ihm.secureme", "fr.ihm.secureme.activity.AlarmActivity");
-                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent1);
 
                 }
             }

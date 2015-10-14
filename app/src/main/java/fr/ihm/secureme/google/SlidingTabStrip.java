@@ -28,7 +28,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -39,7 +38,7 @@ class SlidingTabStrip extends LinearLayout {
     private static final String TAG = "SlidingTabStrip";
     private int[] imageResId = {
             fr.ihm.secureme.R.drawable.ic_error_outline_white_24dp,
-            fr.ihm.secureme.R.drawable.ic_wifi_tethering_white_24dp,
+            fr.ihm.secureme.R.drawable.ic_group_white_24dp,
             fr.ihm.secureme.R.drawable.ic_settings_white_24dp
     };
 
@@ -122,7 +121,6 @@ class SlidingTabStrip extends LinearLayout {
         mSelectedPosition = position;
         mSelectionOffset = positionOffset;
         invalidate();
-        Log.e(TAG, position + " + " + positionOffset);
         TextView tv0 = (TextView) getChildAt(0);
         TextView tv1 = (TextView) getChildAt(1);
         TextView tv2 = (TextView) getChildAt(2);

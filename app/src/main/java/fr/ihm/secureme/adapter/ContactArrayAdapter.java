@@ -6,7 +6,6 @@ package fr.ihm.secureme.adapter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import fr.ihm.secureme.Contact;
 import fr.ihm.secureme.R;
+import fr.ihm.secureme.callback.ContactFragmentInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +25,18 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact>{
     private List<Contact> mContactArrayList = new ArrayList<Contact>();
     private View mRow;
     private CardView mCardView;
+    private ContactFragmentInterface mContactFragmentInterface;
 
     static class ContactViewHolder {
         TextView tvNum;
+        TextView tvName;
         TextView tvMessage;
         ImageView ivGps;
     }
 
-    public ContactArrayAdapter(Context context, int textViewResourceId) {
+    public ContactArrayAdapter(Context context, int textViewResourceId, ContactFragmentInterface contactFragmentInterface) {
         super(context, textViewResourceId);
+        mContactFragmentInterface = contactFragmentInterface;
     }
 
     @Override
@@ -64,6 +67,7 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact>{
             viewHolder.tvNum = (TextView) mRow.findViewById(R.id.num);
             viewHolder.tvMessage = (TextView) mRow.findViewById(R.id.message);
             viewHolder.ivGps = (ImageView) mRow.findViewById(R.id.gps);
+            viewHolder.tvName = (TextView)  mRow.findViewById(R.id.name);
             mRow.setTag(viewHolder);
         } else {
             viewHolder = (ContactViewHolder)mRow.getTag();
@@ -71,6 +75,7 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact>{
         final Contact contact = getItem(position);
         viewHolder.tvNum.setText(contact.getNum());
         viewHolder.tvMessage.setText(contact.getMessage());
+        viewHolder.tvName.setText(contact.getFullName());
         int res = contact.isGps() ? R.drawable.ic_gps_fixed_black_18dp : R.drawable.ic_gps_not_fixed_black_18dp;
         viewHolder.ivGps.setImageResource(res);
 
@@ -78,8 +83,6 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact>{
         btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG, "tabDelete on num " + contact.getNum());
-                viewHolder.tvMessage.setText("CLIIIICK");
                 deleteView(position);
             }
         });
@@ -94,8 +97,9 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact>{
 
 
     private void deleteView(int position) {
-       mContactArrayList.remove(position);
+        mContactArrayList.remove(position);
         notifyDataSetChanged();
+        mContactFragmentInterface.deleteEvent(mContactArrayList.size());
     }
 
     public Bitmap decodeToBitmap(byte[] decodedByte) {

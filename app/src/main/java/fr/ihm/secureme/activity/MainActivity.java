@@ -25,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
     SlidingTabLayout tabs;
     private int[] imageResId = {
             R.drawable.ic_error_outline_white_24dp,
-            R.drawable.ic_wifi_tethering_white_24dp,
+            R.drawable.ic_group_white_24dp,
             R.drawable.ic_settings_white_24dp
     };
     int Numboftabs =3;
@@ -66,7 +66,6 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onPageSelected(int position) {
-                Log.e(TAG, "onPageSelected");
                 setActivityTitle(position);
             }
 

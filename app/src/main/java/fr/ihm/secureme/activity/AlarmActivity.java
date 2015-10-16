@@ -1,7 +1,11 @@
 package fr.ihm.secureme.activity;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.RelativeLayout;
@@ -24,6 +28,7 @@ public class AlarmActivity extends ActionBarActivity {
         t1 = new Timer();
 
         initLight();
+
     }
 
     private void initLight() {

@@ -39,20 +39,16 @@ public class SmsBroadcastReceiver extends BroadcastReceiver{
                     List<Contact> contacts = ContactListSingleton.getInstance().loadContactList(context);
                     for (Contact c : contacts) {
                         if (c.getFormatedNum().equals(phoneNumber) && c.getMessage().equals(message)) {
-                            Toast toast = Toast.makeText(context, "Message reçu de : " + senderNum + " message : " + message, Toast.LENGTH_LONG);
-                            toast.show();
                             if (c.isGps()) {
                                 LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
                                 String locationProvider = LocationManager.NETWORK_PROVIDER;
-                                // Or use LocationManager.GPS_PROVIDER
                                 Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
                                 SmsManager smsManager = SmsManager.getDefault();
-                                smsManager.sendTextMessage(c.getFormatedNum(), null, "Demande de localisation de l'appareil bien reçue :\n " +
-                                        "Coordonnées : " + lastKnownLocation.getLatitude()+ " : "
-                                        +lastKnownLocation.getLongitude() +"\n", null, null);
-                                Log.e("TAG", "Demande de localisation de l'appareil bien reçue :\n " +
-                                        "Coordonnées : " + lastKnownLocation.getLatitude()+ " : "
-                                        +lastKnownLocation.getLongitude() +"\n");
+                                double lat = lastKnownLocation.getLatitude();
+                                double lng = lastKnownLocation.getLongitude();
+                                smsManager.sendTextMessage(c.getFormatedNum(), null,"Coordonnées : "
+                                        + String.valueOf(lat) + ":"
+                                        + lng, null, null);
                             }
                             Intent intent1 = new Intent();
                             intent1.setClassName("fr.ihm.secureme", "fr.ihm.secureme.activity.AlarmActivity");

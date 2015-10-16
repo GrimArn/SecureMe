@@ -2,10 +2,8 @@ package fr.ihm.secureme.adapter;
 
 /**
  * Created by nonau on 10/10/15.
- */import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.v7.widget.CardView;
+ */
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import fr.ihm.secureme.Contact;
+import fr.ihm.secureme.model.Contact;
 import fr.ihm.secureme.R;
 import fr.ihm.secureme.callback.ContactFragmentInterface;
+import fr.ihm.secureme.model.ContactListSingleton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +22,10 @@ import java.util.List;
 public class ContactArrayAdapter extends ArrayAdapter<Contact>{
     private static final String TAG = "ContactArrayAdapter";
     private List<Contact> mContactArrayList = new ArrayList<Contact>();
-    private View mRow;
-    private CardView mCardView;
     private ContactFragmentInterface mContactFragmentInterface;
 
     static class ContactViewHolder {
         TextView tvNum;
-        TextView tvName;
         TextView tvMessage;
         ImageView ivGps;
     }
@@ -57,52 +53,40 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact>{
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        mRow = convertView;
-        mCardView = (CardView) convertView;
+        View row = convertView;
         final ContactViewHolder viewHolder;
-        if (mRow == null) {
+        if (row == null) {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            mRow = inflater.inflate(R.layout.list_item_card, parent, false);
+            row = inflater.inflate(R.layout.list_item_card, parent, false);
             viewHolder = new ContactViewHolder();
-            viewHolder.tvNum = (TextView) mRow.findViewById(R.id.num);
-            viewHolder.tvMessage = (TextView) mRow.findViewById(R.id.message);
-            viewHolder.ivGps = (ImageView) mRow.findViewById(R.id.gps);
-            viewHolder.tvName = (TextView)  mRow.findViewById(R.id.name);
-            mRow.setTag(viewHolder);
+            viewHolder.tvNum = (TextView) row.findViewById(R.id.num);
+            viewHolder.tvMessage = (TextView) row.findViewById(R.id.message);
+            viewHolder.ivGps = (ImageView) row.findViewById(R.id.gps);
+            row.setTag(viewHolder);
         } else {
-            viewHolder = (ContactViewHolder)mRow.getTag();
+            viewHolder = (ContactViewHolder) row.getTag();
         }
         final Contact contact = getItem(position);
         viewHolder.tvNum.setText(contact.getNum());
         viewHolder.tvMessage.setText(contact.getMessage());
-        viewHolder.tvName.setText(contact.getFullName());
         int res = contact.isGps() ? R.drawable.ic_gps_fixed_black_18dp : R.drawable.ic_gps_not_fixed_black_18dp;
         viewHolder.ivGps.setImageResource(res);
 
-        ImageButton btDelete = (ImageButton) mRow.findViewById(R.id.bt_delete);
+        ImageButton btDelete = (ImageButton) row.findViewById(R.id.bt_delete);
         btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 deleteView(position);
             }
         });
-        /*mCardView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return false;
-            }
-        });*/
-        return mRow;
+        return row;
     }
 
 
     private void deleteView(int position) {
         mContactArrayList.remove(position);
+        ContactListSingleton.getInstance().remove(position);
         notifyDataSetChanged();
         mContactFragmentInterface.deleteEvent(mContactArrayList.size());
-    }
-
-    public Bitmap decodeToBitmap(byte[] decodedByte) {
-        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 }

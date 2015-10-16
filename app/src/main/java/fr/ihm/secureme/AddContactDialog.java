@@ -8,23 +8,19 @@ import android.net.Uri;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import fr.ihm.secureme.callback.ContactFragmentInterface;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
-import android.app.Activity;
-import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.util.Log;
-import android.view.View;
+import fr.ihm.secureme.model.Contact;
 
 /**
  * Created by nonau on 13/10/15.
@@ -38,19 +34,46 @@ public class AddContactDialog extends DialogFragment {
     EditText messTextField;
     ImageButton indexImageButton;
     CheckBox gpsCheckbox;
-    String currentName;
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-         mBuilder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View v  = inflater.inflate(R.layout.add_contact_dialog, null);
+    View mView;
+    State mState;
+    private AlertDialog mDialog;
+    private Button mPositiveDialogButton;
 
+    enum State {
+        EMPTY,
+        READY
+    }
 
-        numTextField = (EditText) v.findViewById(R.id.num_edittext);
-        messTextField = (EditText) v.findViewById(R.id.mess_edittext);
-        indexImageButton = (ImageButton) v.findViewById(R.id.bt_index);
-        gpsCheckbox = (CheckBox) v.findViewById(R.id.gps_check);
+    public void init () {
+        mState = State.EMPTY;
+        numTextField = (EditText) mView.findViewById(R.id.num_edittext);
+        messTextField = (EditText) mView.findViewById(R.id.mess_edittext);
+        indexImageButton = (ImageButton) mView.findViewById(R.id.bt_index);
+        gpsCheckbox = (CheckBox) mView.findViewById(R.id.gps_check);
+        numTextField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                onTextEntry();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        messTextField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                onTextEntry();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
         indexImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,14 +83,48 @@ public class AddContactDialog extends DialogFragment {
             }
         });
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        mBuilder.setView(v)
+
+    }
+
+    private void onTextEntry() {
+        switch (mState) {
+            case EMPTY:
+                Log.e("test", "EMPTY");
+                if (numTextField.length() >= 10 && messTextField.length() > 5) {
+                    mState = State.READY;
+                    mPositiveDialogButton.setEnabled(true);
+                }
+                else {
+                    mState = State.EMPTY;
+                }
+                break;
+            case READY:
+                Log.e("test", "READY");
+                if (numTextField.length() < 10 || messTextField.length() <= 5) {
+                    mState = State.EMPTY;
+                    mPositiveDialogButton.setEnabled(false);
+                }
+                else {
+                    mState = State.READY;
+                }
+                break;
+
+        }
+    }
+
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        mBuilder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        mView  = inflater.inflate(R.layout.add_contact_dialog, null);
+        init();
+
+        mBuilder.setView(mView)
                 .setPositiveButton("AJOUTER", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        mContactFragmentInterface.dialogCallBackHandler(new Contact(numTextField.getText().toString(),
-                                currentName , messTextField.getText().toString(), gpsCheckbox.isChecked()));
+                        mContactFragmentInterface.dialogCallBackHandler(new Contact(numTextField.getText().toString(), messTextField.getText().toString(), gpsCheckbox.isChecked()));
                     }
                 })
                 .setIcon(R.drawable.ic_person_add_black_24dp)
@@ -78,7 +135,16 @@ public class AddContactDialog extends DialogFragment {
                         mContactFragmentInterface.dialogCancelHandler();
                     }
                 });
-        return mBuilder.create();
+        mDialog = mBuilder.create();
+        mDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialog) {
+                mPositiveDialogButton = mDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                mPositiveDialogButton.setEnabled(false);
+            }
+        });
+
+        return mDialog;
     }
 
     public void setContactFragmentInterface(ContactFragmentInterface fragmentInterface) {
@@ -87,6 +153,7 @@ public class AddContactDialog extends DialogFragment {
 
     public void show(Activity activity, String dial) {
         super.show(activity.getFragmentManager(), dial);
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -99,21 +166,15 @@ public class AddContactDialog extends DialogFragment {
                     if(cursor.getCount() > 0) {
                         cursor.moveToFirst();
                         String formattedPhoneNumber = cursor.getString( cursor.getColumnIndex(Phone.NUMBER) );
-                        //àcurrentName =  cursor.getString( cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME) );
                         numTextField.setText(formattedPhoneNumber);
                     }
                     cursor.close();
                 }
+                onTextEntry();
             }
-            else {
-                Log.w("TestActivity", "WARNING: Corrupted request response");
+            else if (resultCode == getActivity().RESULT_CANCELED){
+                onTextEntry();
             }
-        }
-        else if (resultCode == getActivity().RESULT_CANCELED) {
-            Log.i("TestActivity", "Popup canceled by user.");
-        }
-        else {
-            Log.w("TestActivity", "WARNING: Unknown resultCode");
         }
     }
 

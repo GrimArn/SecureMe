@@ -30,12 +30,6 @@
                         android:layout_height="wrap_content"
                         android:text="Text line 1" android:textSize="18dp"
                         android:textColor="@color/primary_dark_text" android:textStyle="bold"/>
-                <TextView
-                        android:id="@+id/name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Text line 1" android:textSize="18dp"
-                        android:textColor="@color/hint_disable_dark"/>
             </LinearLayout>
             <LinearLayout
                     android:orientation="horizontal"

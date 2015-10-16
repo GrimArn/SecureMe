@@ -1,5 +1,6 @@
 package fr.ihm.secureme.activity;
 
+import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -11,7 +12,15 @@ import fr.ihm.secureme.fragment.AlertFragment;
 import fr.ihm.secureme.fragment.ContactFragment;
 import fr.ihm.secureme.fragment.SettingsFragment;
 import fr.ihm.secureme.google.SlidingTabLayout;
+import fr.ihm.secureme.json.ContactJsonWriter;
+import fr.ihm.secureme.model.Contact;
+import fr.ihm.secureme.model.ContactListSingleton;
+import fr.ihm.secureme.tools.Constants;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ContactListSingleton.getInstance().loadContactList(this);
         mListFragment = new ArrayList<CharSequence>(Numboftabs);
         mListFragment.add(AlertFragment.sTitle);
         mListFragment.add(ContactFragment.sTitle);
@@ -75,6 +85,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
     }
+
 
     private void setActivityTitle(int i) {
         getSupportActionBar().setTitle(mListFragment.get(i));

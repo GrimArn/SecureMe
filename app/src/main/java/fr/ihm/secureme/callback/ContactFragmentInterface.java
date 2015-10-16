@@ -1,6 +1,6 @@
 package fr.ihm.secureme.callback;
 
-import fr.ihm.secureme.Contact;
+import fr.ihm.secureme.model.Contact;
 
 /**
  * Created by nonau on 12/10/15.

@@ -1,4 +1,4 @@
-package fr.ihm.secureme;
+package fr.ihm.secureme.model;
 
 /**
  * Created by nonau on 10/10/15.
@@ -6,19 +6,11 @@ package fr.ihm.secureme;
 public class Contact {
 
     private String mNum;
-    private String mFullName;
     private String mMessage;
     private boolean mIsGps;
 
     public Contact(String num, String message, boolean isGps) {
         mNum = num;
-        mMessage = message;
-        mIsGps = isGps;
-    }
-
-    public Contact(String num, String fullName, String message, boolean isGps) {
-        mNum = num;
-        mFullName = fullName;
         mMessage = message;
         mIsGps = isGps;
     }
@@ -47,15 +39,4 @@ public class Contact {
         mIsGps = isGps;
     }
 
-    public String getFullName()  {
-        if (mFullName == null  || mFullName.equals("") )
-            return "";
-        else {
-            return "("+mFullName+")";
-        }
-    }
-
-    public void setFullName(String fullName) {
-        mFullName = fullName;
-    }
 }

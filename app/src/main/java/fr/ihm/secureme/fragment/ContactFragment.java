@@ -1,8 +1,6 @@
 package fr.ihm.secureme.fragment;
 
 
-import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,10 +10,11 @@ import android.view.ViewGroup;
 
 import android.widget.ListView;
 import fr.ihm.secureme.AddContactDialog;
-import fr.ihm.secureme.Contact;
+import fr.ihm.secureme.model.Contact;
 import fr.ihm.secureme.R;
 import fr.ihm.secureme.adapter.ContactArrayAdapter;
 import fr.ihm.secureme.callback.ContactFragmentInterface;
+import fr.ihm.secureme.model.ContactListSingleton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,6 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
     private State mState;
     private State mDialogHistoState;
 
-
     public enum State {
         EMPTY,
         DIALOG,
@@ -54,6 +52,7 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
             }
         });
         return mFragmentView;
+
     }
 
     private void init(LayoutInflater inflater, ViewGroup container) {
@@ -119,6 +118,7 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
                 } else if (mDialogHistoState == State.FILLED){
                     mState = State.FILLED;
                 }
+                ContactListSingleton.getInstance().add(c);
                 mContactArrayAdapter.add(c);
                 break;
         }
@@ -180,9 +180,13 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
 
 
     public List<Contact> getContactList() {
-        List<Contact> list = new ArrayList<Contact>();
-        //TODO code pour récupérer les contacts en interne
-        list.add(new Contact("9876543210", "INIT", false));
-        return list;
+        return ContactListSingleton.getInstance().getContactList();
+    }
+
+    @Override
+    public void onPause() {
+        ContactListSingleton.getInstance().saveContactList(getActivity());
+        super.onPause();
+
     }
 }

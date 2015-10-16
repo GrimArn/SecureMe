@@ -36,6 +36,7 @@ public class ContactJsonWriter extends AbstractJsonWriter {
     private void writeContact(JsonWriter writer, Contact contact) throws IOException {
         writer.beginObject();
         writer.name("num").value(contact.getNum());
+        writer.name("formatednum").value(contact.getFormatedNum());
         writer.name("mess").value(contact.getMessage());
         writer.name("gps").value(contact.isGps());
         writer.endObject();

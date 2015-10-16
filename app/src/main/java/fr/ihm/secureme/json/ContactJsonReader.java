@@ -15,6 +15,7 @@ import java.util.List;
 public class ContactJsonReader extends AbstractJsonReader {
 
     public static final String NUM = "num";
+    public static final String FORMATENUM = "formatednum";
     public static final String MESS = "mess";
     public static final String ISGPS = "gps";
 
@@ -47,6 +48,7 @@ public class ContactJsonReader extends AbstractJsonReader {
 
     private Contact readContact(JsonReader reader) throws IOException {
         String num = "";
+        String formatedNum = "";
         String mess = "";
         boolean gps = false;
 
@@ -57,7 +59,10 @@ public class ContactJsonReader extends AbstractJsonReader {
             if (name.equals(NUM)) {
                 num = reader.nextString();
 
-            } else if (name.equals(MESS)) {
+            } else if (name.equals(FORMATENUM)) {
+                formatedNum = reader.nextString();
+
+            }else if (name.equals(MESS)) {
                 mess = reader.nextString();
 
             } else if (name.equals(ISGPS)) {
@@ -65,6 +70,6 @@ public class ContactJsonReader extends AbstractJsonReader {
             }
         }
         reader.endObject();
-        return new Contact(num, mess, gps);
+        return new Contact(num, formatedNum, mess, gps);
     }
 }

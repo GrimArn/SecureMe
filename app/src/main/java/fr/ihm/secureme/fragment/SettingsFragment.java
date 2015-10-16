@@ -27,5 +27,6 @@ public class SettingsFragment extends PreferenceFragment{
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         addPreferencesFromResource(R.xml.preference);
+        
     }
 }

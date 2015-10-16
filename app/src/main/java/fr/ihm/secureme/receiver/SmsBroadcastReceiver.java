@@ -3,6 +3,8 @@ package fr.ihm.secureme.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Telephony;
 import android.telephony.SmsManager;
@@ -36,15 +38,27 @@ public class SmsBroadcastReceiver extends BroadcastReceiver{
                     String message = currentMessage.getDisplayMessageBody();
                     List<Contact> contacts = ContactListSingleton.getInstance().loadContactList(context);
                     for (Contact c : contacts) {
-                        Log.e("TAG", "TEXTO   : " + senderNum  + " MESSAGE : " + message);
-                        Log.e("TAG", "Contact : " + c.getFormatedNum() + " MESSAGE : " + c.getMessage());
                         if (c.getFormatedNum().equals(phoneNumber) && c.getMessage().equals(message)) {
                             Toast toast = Toast.makeText(context, "Message reçu de : " + senderNum + " message : " + message, Toast.LENGTH_LONG);
                             toast.show();
+                            if (c.isGps()) {
+                                LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+                                String locationProvider = LocationManager.NETWORK_PROVIDER;
+                                // Or use LocationManager.GPS_PROVIDER
+                                Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
+                                SmsManager smsManager = SmsManager.getDefault();
+                                smsManager.sendTextMessage(c.getFormatedNum(), null, "Demande de localisation de l'appareil bien reçue :\n " +
+                                        "Coordonnées : " + lastKnownLocation.getLatitude()+ " : "
+                                        +lastKnownLocation.getLongitude() +"\n", null, null);
+                                Log.e("TAG", "Demande de localisation de l'appareil bien reçue :\n " +
+                                        "Coordonnées : " + lastKnownLocation.getLatitude()+ " : "
+                                        +lastKnownLocation.getLongitude() +"\n");
+                            }
                             Intent intent1 = new Intent();
                             intent1.setClassName("fr.ihm.secureme", "fr.ihm.secureme.activity.AlarmActivity");
                             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(intent1);
+                            return;
                         }
                     }
                 }

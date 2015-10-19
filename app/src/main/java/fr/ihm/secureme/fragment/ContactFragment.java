@@ -1,6 +1,7 @@
 package fr.ihm.secureme.fragment;
 
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -9,15 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.AdapterView;
 import android.widget.ListView;
-import fr.ihm.secureme.AddContactDialog;
+import fr.ihm.secureme.dialog.AddContactDialog;
 import fr.ihm.secureme.model.Contact;
 import fr.ihm.secureme.R;
 import fr.ihm.secureme.adapter.ContactArrayAdapter;
 import fr.ihm.secureme.callback.ContactFragmentInterface;
 import fr.ihm.secureme.model.ContactListSingleton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,6 +36,7 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
     public static CharSequence sTitle = "Contacts d'urgence";
     private State mState;
     private State mDialogHistoState;
+    private AddContactDialog mAddContactDialog;
 
     public enum State {
         EMPTY,
@@ -64,6 +66,7 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
         mActionButton = (FloatingActionButton) mFragmentView.findViewById(R.id.fab);
         mContactArrayAdapter = new ContactArrayAdapter(getActivity().getApplicationContext(), R.layout.list_item_card, this);
 
+
         //On récupere les contacts en base
         List<Contact> listContact = getContactList();
 
@@ -80,6 +83,24 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
             mListview.addHeaderView(new View(getActivity()));
             mListview.addFooterView(new View(getActivity()));
             mListview.setAdapter(mContactArrayAdapter);
+            mListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.e(TAG, "OnItemClivk");
+                    Contact c = mContactArrayAdapter.getItem(position);
+                    AddContactDialog addContactDialog;
+                    addContactDialog = new AddContactDialog();
+                    Bundle args = new Bundle();
+                    args.putBoolean("isEdit", true);
+                    args.putString("num", c.getNum());
+                    args.putString("mess", c.getMessage());
+                    args.putBoolean("gps", c.isGps());
+                    addContactDialog.setArguments(args);
+                    addContactDialog.setContactFragmentInterface(ContactFragment.this);
+                    addContactDialog.show(getActivity(), "addContactDialog");
+
+                }
+            });
         }
 
 
@@ -87,26 +108,28 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
 
 
     private void addButtonEventHandler(){
-        AddContactDialog addContactDialog;
         switch (mState) {
             case EMPTY:
                 mState = State.DIALOG;
                 mDialogHistoState = State.EMPTY;
-                addContactDialog = new AddContactDialog();
-                addContactDialog.setContactFragmentInterface(this);
-                addContactDialog.show(getActivity(), "addContactDialog");
+                mAddContactDialog = new AddContactDialog();
+                mAddContactDialog.setContactFragmentInterface(this);
+                mAddContactDialog.setArguments(new Bundle());
+                mAddContactDialog.show(getActivity(), "addContactDialog");
                 break;
             case FILLED:
                 mState = State.DIALOG;
                 mDialogHistoState = State.FILLED;
-                addContactDialog = new AddContactDialog();
-                addContactDialog.setContactFragmentInterface(this);
-                addContactDialog.show(getActivity(), "addContactDialog");
+                mAddContactDialog = new AddContactDialog();
+                mAddContactDialog.setContactFragmentInterface(this);
+                mAddContactDialog.setArguments(new Bundle());
+                mAddContactDialog.show(getActivity(), "addContactDialog");
                 break;
             case DIALOG:
                 //Interdit
         }
     }
+
     @Override
     public void dialogCallBackHandler(Contact c) {
         switch (mState) {
@@ -123,6 +146,32 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
                 mContactArrayAdapter.add(c);
                 break;
         }
+    }
+
+    @Override
+    public void dialogEdit(int position) {
+        switch (mState) {
+            case FILLED:
+                mDialogHistoState = State.FILLED;
+                AddContactDialog addContactDialog = new AddContactDialog();
+                Contact c = mContactArrayAdapter.getItem(position);
+                Bundle args = new Bundle();
+                args.putBoolean("isEdit", true);
+                args.putString("num", c.getNum());
+                args.putString("mess", c.getMessage());
+                args.putBoolean("gps", c.isGps());
+                args.putInt("pos", position);
+                addContactDialog.setArguments(args);
+                addContactDialog.setContactFragmentInterface(this);
+                addContactDialog.show(getActivity(), "addContactDialog");
+        }
+    }
+
+    @Override
+    public void dialogEditCallback(Contact c, int position) {
+        mContactArrayAdapter.setContactAt(c, position);
+        ContactListSingleton.getInstance().setContactAt(c, position);
+
     }
 
     @Override
@@ -189,6 +238,7 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
         Log.e(TAG, "onpause");
         ContactListSingleton.getInstance().saveContactList(getActivity());
         super.onPause();
-
     }
+
+
 }

@@ -15,4 +15,26 @@
     <string name="pref_title_emer_num">Numéro</string>
     <string name="pref_summary_emer_text">Texte à envoyer au contact d\'urgence</string>
     <string name="pref_title_emer_text">Texte</string>
+    <string name="zero">0</string>
+    <string name="one">1</string>
+    <string name="two">2</string>
+    <string name="three">3</string>
+    <string name="four">4</string>
+    <string name="five">5</string>
+    <string name="six">6</string>
+    <string name="seven">7</string>
+    <string name="eight">8</string>
+    <string name="nine">9</string>
+    <string name="eighteen">18</string>
+    <string name="pref_summary_code_text">Code de déverrouillage</string>
+    <string name="pref_title_code_text">Code de déverrouillage</string>
+    <string name="pref_unlock_contact">Déverrouillage</string>
+    <string name="confirm_text">Valider</string>
+    <string name="confirm_code_text">Confirmer code</string>
+    <string name="enter_code">Entrer votre code</string>
+    <string name="ok">VALIDER</string>
+    <string name="define_code_text">Definir code de sécurité</string>
+    <string name="define">Definir</string>
+
+
 </resources>

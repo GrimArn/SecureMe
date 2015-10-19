@@ -74,4 +74,8 @@ public class ContactListSingleton {
     public void remove(int position) {
         INSTANCE.mContactList.remove(position);
     }
+
+    public void setContactAt(Contact c, int contactAt) {
+        INSTANCE.mContactList.set(contactAt, c);
+    }
 }

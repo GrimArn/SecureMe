@@ -1,4 +1,4 @@
-package fr.ihm.secureme;
+package fr.ihm.secureme.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import fr.ihm.secureme.R;
 import fr.ihm.secureme.callback.ContactFragmentInterface;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class AddContactDialog extends DialogFragment {
     CheckBox gpsCheckbox;
     View mView;
     State mState;
+    String mTitle ="";
     private AlertDialog mDialog;
     private Button mPositiveDialogButton;
 
@@ -44,12 +46,20 @@ public class AddContactDialog extends DialogFragment {
         READY
     }
 
-    public void init () {
+    public void init (Bundle args) {
         mState = State.EMPTY;
         numTextField = (EditText) mView.findViewById(R.id.num_edittext);
         messTextField = (EditText) mView.findViewById(R.id.mess_edittext);
         indexImageButton = (ImageButton) mView.findViewById(R.id.bt_index);
         gpsCheckbox = (CheckBox) mView.findViewById(R.id.gps_check);
+        mTitle = "Ajouter";
+        if (args.containsKey("isEdit") && args.getBoolean("isEdit")) {
+            mTitle = "Editer";
+            numTextField.setText(args.getString("num"));
+            messTextField.setText(args.getString("mess"));
+            gpsCheckbox.setChecked(args.getBoolean("gps"));
+        }
+
         numTextField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -116,19 +126,31 @@ public class AddContactDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         mBuilder = new AlertDialog.Builder(getActivity());
+
         LayoutInflater inflater = getActivity().getLayoutInflater();
         mView  = inflater.inflate(R.layout.add_contact_dialog, null);
-        init();
-
+        final Bundle args = getArguments();
+        init(args);
+        int ressource;
+        if (args.containsKey("isEdit") && args.getBoolean("isEdit"))
+            ressource = R.drawable.ic_edit_black_24dp;
+        else
+            ressource = R.drawable.ic_person_add_black_24dp;
         mBuilder.setView(mView)
-                .setPositiveButton("AJOUTER", new DialogInterface.OnClickListener() {
+                .setPositiveButton(mTitle.toUpperCase(), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        mContactFragmentInterface.dialogCallBackHandler(new Contact(numTextField.getText().toString(), messTextField.getText().toString(), gpsCheckbox.isChecked()));
+                        Contact c = new Contact(numTextField.getText().toString(), messTextField.getText().toString(), gpsCheckbox.isChecked());
+                        if (args.containsKey("isEdit") && args.getBoolean("isEdit")) {
+                            mContactFragmentInterface.dialogEditCallback(c, args.getInt("pos"));
+                        } else {
+                            mContactFragmentInterface.dialogCallBackHandler(c);
+                        }
+
                     }
                 })
-                .setIcon(R.drawable.ic_person_add_black_24dp)
-                .setTitle("Ajouter un contact d'urgence")
+                .setIcon(ressource)
+                .setTitle(mTitle + " un contact d'urgence")
                 .setNegativeButton("ANNULER", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         AddContactDialog.this.getDialog().cancel();
@@ -141,6 +163,9 @@ public class AddContactDialog extends DialogFragment {
             public void onShow(DialogInterface dialog) {
                 mPositiveDialogButton = mDialog.getButton(AlertDialog.BUTTON_POSITIVE);
                 mPositiveDialogButton.setEnabled(false);
+                if (args.getBoolean("isEdit")) {
+                    mPositiveDialogButton.setEnabled(true);
+                }
             }
         });
 

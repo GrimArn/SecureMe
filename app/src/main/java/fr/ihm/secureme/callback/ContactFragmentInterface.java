@@ -7,6 +7,9 @@ import fr.ihm.secureme.model.Contact;
  */
 public interface ContactFragmentInterface {
     void deleteEvent(int itemCount);
-    void dialogCallBackHandler(Contact c);
     void dialogCancelHandler();
+    void dialogCallBackHandler(Contact c);
+    void dialogEdit(int position);
+    void dialogEditCallback(Contact c, int postion);
+
 }

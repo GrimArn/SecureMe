@@ -24,6 +24,11 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact>{
     private List<Contact> mContactArrayList = new ArrayList<Contact>();
     private ContactFragmentInterface mContactFragmentInterface;
 
+    public void setContactAt(Contact c, int position) {
+        mContactArrayList.set(position, c);
+        notifyDataSetChanged();
+    }
+
     static class ContactViewHolder {
         TextView tvNum;
         TextView tvMessage;
@@ -77,6 +82,12 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact>{
             @Override
             public void onClick(View v) {
                 deleteView(position);
+            }
+        });
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mContactFragmentInterface.dialogEdit(position);
             }
         });
         return row;

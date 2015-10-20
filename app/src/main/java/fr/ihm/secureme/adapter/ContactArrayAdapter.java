@@ -4,6 +4,7 @@ package fr.ihm.secureme.adapter;
  * Created by nonau on 10/10/15.
  */
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,8 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact>{
     public View getView(final int position, View convertView, ViewGroup parent) {
         View row = convertView;
         final ContactViewHolder viewHolder;
+        Typeface myTypefaceRegular = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Thin.ttf");
+        Typeface myTypefaceBold = Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Bold.ttf");
         if (row == null) {
             LayoutInflater inflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(R.layout.list_item_card, parent, false);
@@ -72,7 +75,9 @@ public class ContactArrayAdapter extends ArrayAdapter<Contact>{
             viewHolder = (ContactViewHolder) row.getTag();
         }
         final Contact contact = getItem(position);
+        viewHolder.tvNum.setTypeface(myTypefaceBold);
         viewHolder.tvNum.setText(contact.getNum());
+        viewHolder.tvMessage.setTypeface(myTypefaceRegular);
         viewHolder.tvMessage.setText(contact.getMessage());
         int res = contact.isGps() ? R.drawable.ic_gps_fixed_black_18dp : R.drawable.ic_gps_not_fixed_black_18dp;
         viewHolder.ivGps.setImageResource(res);

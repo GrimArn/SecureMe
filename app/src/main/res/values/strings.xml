@@ -35,6 +35,7 @@
     <string name="ok">VALIDER</string>
     <string name="define_code_text">Definir code de sécurité</string>
     <string name="define">Definir</string>
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
 
 
 </resources>

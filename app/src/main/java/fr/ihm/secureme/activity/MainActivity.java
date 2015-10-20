@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ContactListSingleton.getInstance().loadContactList(this);
         mListFragment = new ArrayList<CharSequence>(Numboftabs);
         mListFragment.add(AlertFragment.sTitle);
         mListFragment.add(ContactFragment.sTitle);

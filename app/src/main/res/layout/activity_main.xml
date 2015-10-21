@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             />
 
-    <fr.ihm.secureme.google.SlidingTabLayout
+    <fr.ihm.secureme.google.IconSlidingTabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:elevation="2dp"

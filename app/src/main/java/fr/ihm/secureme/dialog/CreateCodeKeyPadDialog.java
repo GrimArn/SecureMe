@@ -28,7 +28,7 @@ public class CreateCodeKeyPadDialog extends AbstractKeyPadDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.setTitle(getContext().getString(R.string.define_code_text));
-
+        super.setMessage(getContext().getString(R.string.input_new_code));
         super.onCreate(savedInstanceState);
         super.setPositiveButtonText(getContext().getString(R.string.define));
         setPositiveButtonListener(new View.OnClickListener() {

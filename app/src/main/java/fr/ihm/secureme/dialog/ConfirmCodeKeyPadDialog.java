@@ -27,6 +27,7 @@ public class ConfirmCodeKeyPadDialog extends AbstractKeyPadDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.setTitle(getContext().getString(R.string.confirm_code_text));
+        super.setMessage(getContext().getString(R.string.input_confirm_code));
         super.onCreate(savedInstanceState);
         super.setPositiveButtonText(getContext().getString(R.string.confirm_text));
         setPositiveButtonListener(new View.OnClickListener() {

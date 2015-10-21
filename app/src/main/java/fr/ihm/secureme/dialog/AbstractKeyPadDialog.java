@@ -33,6 +33,7 @@ public abstract class AbstractKeyPadDialog extends Dialog {
     protected Button mPositiveButton;
     protected Button mNegativeButton;
     protected Button mClearButton;
+    protected TextView mMessageDialog;
 
     protected KeyPadPreferenceInterface mKeyPadPreferenceInterface;
 
@@ -42,6 +43,7 @@ public abstract class AbstractKeyPadDialog extends Dialog {
         mKeyPadPreferenceInterface = keyPadPreferenceInterface;
         requestWindowFeature(Window.FEATURE_LEFT_ICON);
         super.setContentView(R.layout.keypad_layout);
+        mMessageDialog = (TextView) findViewById(R.id.messagetext);
     }
 
     public AbstractKeyPadDialog(Context context, int themeResId) {
@@ -61,7 +63,10 @@ public abstract class AbstractKeyPadDialog extends Dialog {
     @Override
     public void setTitle(CharSequence title) {
         super.setTitle(title);
+    }
 
+    public void setMessage(CharSequence message) {
+        mMessageDialog.setText(message);
     }
 
     public void setPositiveButtonText(CharSequence text) {
@@ -93,6 +98,7 @@ public abstract class AbstractKeyPadDialog extends Dialog {
         });
         mPositiveButton.setEnabled(false);
         mClearButton.setEnabled(false);
+
         initTextField();
         initKeyPad();
     }

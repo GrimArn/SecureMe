@@ -26,6 +26,7 @@ public class CheckCodeKeyPadDialog extends AbstractKeyPadDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.setTitle(getContext().getString(R.string.enter_code));
+        super.setMessage(getContext().getString(R.string.input_old_text));
         super.onCreate(savedInstanceState);
         super.setPositiveButtonText(getContext().getString(R.string.ok));
         setPositiveButtonListener(new View.OnClickListener() {

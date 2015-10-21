@@ -36,6 +36,9 @@
     <string name="define_code_text">Definir code de sécurité</string>
     <string name="define">Definir</string>
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="input_old_text">Renseigner votre ancien code</string>
+    <string name="input_confirm_code">Confirmer le nouveau code</string>
+    <string name="input_new_code">Saisir votre nouveau code</string>
 
 
 </resources>

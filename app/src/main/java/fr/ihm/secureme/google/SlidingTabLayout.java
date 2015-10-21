@@ -62,11 +62,11 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
     }
 
-    private static final int TITLE_OFFSET_DIPS = 20;
+    protected static final int TITLE_OFFSET_DIPS = 20;
     private static final int TAB_VIEW_PADDING_DIPS = 10;
     private static final int TAB_VIEW_TEXT_SIZE_SP = 12;
 
-    private int mTitleOffset;
+    protected int mTitleOffset;
 
     private int mTabViewLayoutId;
     private int mTabViewTextViewId;
@@ -76,7 +76,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
     private SparseArray<String> mContentDescriptions = new SparseArray<String>();
     private ViewPager.OnPageChangeListener mViewPagerPageChangeListener;
 
-    private final SlidingTabStrip mTabStrip;
+    protected SlidingTabStrip mTabStrip;
 
     public SlidingTabLayout(Context context) {
         this(context, null);
@@ -96,7 +96,7 @@ public class SlidingTabLayout extends HorizontalScrollView {
 
         mTitleOffset = (int) (TITLE_OFFSET_DIPS * getResources().getDisplayMetrics().density);
 
-        mTabStrip = new SlidingTabStrip(context);
+        mTabStrip = new IconSlidingTabStrip(context);
         addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     }
 

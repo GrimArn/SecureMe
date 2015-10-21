@@ -12,6 +12,7 @@ import fr.ihm.secureme.adapter.ViewPagerAdapter;
 import fr.ihm.secureme.fragment.AlertFragment;
 import fr.ihm.secureme.fragment.ContactFragment;
 import fr.ihm.secureme.fragment.SettingsFragment;
+import fr.ihm.secureme.google.IconSlidingTabLayout;
 import fr.ihm.secureme.google.SlidingTabLayout;
 import fr.ihm.secureme.json.ContactJsonWriter;
 import fr.ihm.secureme.model.Contact;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity" ;
     ViewPager pager;
     ViewPagerAdapter adapter;
-    SlidingTabLayout tabs;
+    IconSlidingTabLayout tabs;
     private int[] imageResId = {
             R.drawable.ic_error_outline_white_24dp,
             R.drawable.ic_group_white_24dp,
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Assiging the Sliding Tab Layout View
-        tabs = (SlidingTabLayout) findViewById(R.id.tabs);
+        tabs = (IconSlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true); // To make the Tabs Fixed set this true, This makes the tabs Space Evenly in Available width
         tabs.setCustomTabView(R.layout.custom_tab, 0);
         // Setting the ViewPager For the SlidingTabsLayout

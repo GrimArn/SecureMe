@@ -1,15 +1,11 @@
 package fr.ihm.secureme.activity;
 
-import android.content.Context;
+
 import android.content.SharedPreferences;
-import android.location.Location;
-import android.location.LocationManager;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.*;
 import android.widget.Button;
@@ -23,8 +19,8 @@ import java.util.TimerTask;
 
 public class AlarmActivity extends AppCompatActivity implements View.OnClickListener {
 
-    RelativeLayout rl;
-    Timer t1;
+    RelativeLayout mActivityBackground;
+    Timer mTimerChangingColor;
     private TextView mCodeField;
 
     protected Button mButtonZero;
@@ -39,7 +35,16 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     protected Button mButtonNine;
 
     private boolean mCodeFound = false;
-    private String mCode;
+
+    private State mState;
+    enum State {
+        RED,
+        BLUE,
+        GREEN,
+        YELLOW,
+        UNLOCKED,
+        CODEWRONG
+    }
 
 
     @Override
@@ -47,13 +52,75 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_alarm);
-        rl = (RelativeLayout) findViewById(R.id.mainlayout);
-        t1 = new Timer();
 
-        mCodeField = (TextView) findViewById(R.id.code_tv);
+        init();
+
+
+    }
+
+    private void init() {
+        mState = State.RED;
+        initViews();
         initLight();
         initButtons();
+        initTimer();
+    }
 
+    private void initTimer() {
+        mTimerChangingColor = new Timer();
+        tickTimer();
+    }
+
+    private void tickTimer() {
+        mTimerChangingColor.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        timerHandler();
+                    }
+                });
+            }
+        }, 50);
+    }
+
+    private void timerHandler() {
+        switch (mState) {
+            case RED:
+                mState = State.BLUE;
+                lightRed();
+                tickTimer();
+                break;
+            case BLUE:
+                mState = State.GREEN;
+                lightBlue();
+                tickTimer();
+                break;
+            case GREEN:
+                mState = State.YELLOW;
+                lightGreen();
+                tickTimer();
+                break;
+            case YELLOW:
+                mState = State.RED;
+                lightYellow();
+                tickTimer();
+                break;
+            case UNLOCKED:
+                lightGreen();
+                screenUnlocking();
+                break;
+            case CODEWRONG:
+                lightRed();
+                keepScreenLocked();
+                break;
+        }
+    }
+
+    private void initViews() {
+        mActivityBackground = (RelativeLayout) findViewById(R.id.mainlayout);
+        mCodeField = (TextView) findViewById(R.id.code_tv);
     }
 
     @Override
@@ -90,61 +157,20 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void lightRed() {
-        t1.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        rl.setBackgroundColor(getResources().getColor(R.color.red));
-                        lightBlue();
-                    }
-                });
-
-            }
-        }, 50);
-
+        mActivityBackground.setBackgroundColor(getResources().getColor(R.color.red));
     }
     private void lightBlue() {
-        t1.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        rl.setBackgroundColor(getResources().getColor(R.color.blue));
-                        lightGreen();
-                    }
-                });
-
-            }
-        }, 50);
-
+        mActivityBackground.setBackgroundColor(getResources().getColor(R.color.blue));
     }
 
     private void lightGreen() {
-        t1.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        rl.setBackgroundColor(getResources().getColor(R.color.green));
-                        if (mCodeFound) {
-                            screenUnlocking();
-                        } else {
-                            lightYellow();
-                        }
-
-                    }
-                });
-
-            }
-        }, 50);
-
+        mActivityBackground.setBackgroundColor(getResources().getColor(R.color.green));
+    }
+    private void lightYellow() {
+        mActivityBackground.setBackgroundColor(getResources().getColor(R.color.yellow));
     }
     private void screenUnlocking() {
-        t1.schedule(new TimerTask() {
+        mTimerChangingColor.schedule(new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
@@ -157,45 +183,20 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             }
         }, 1000);
     }
-
-    private void lightYellow() {
-        t1.schedule(new TimerTask() {
+    private void keepScreenLocked() {
+        mTimerChangingColor.schedule(new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        rl.setBackgroundColor(getResources().getColor(R.color.yellow));
-                        lightRed();
+                        tickTimer();
+                        mState = State.RED;
                     }
                 });
 
-
             }
-        }, 50);
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_alarm, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        }, 1000);
     }
 
     @Override
@@ -206,23 +207,34 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onBackPressed() {
-        return;
     }
 
     private void onKeyPressed(String key){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String code = sharedPreferences.getString("pref_app_code", "NULL");
         Log.e("TAG", code);
-        if (mCodeField.length() < 4) {
-            mCodeField.setText(mCodeField.getText() + key);
-        }
-        if (mCodeField.length() == 4) {
-            if (code.equals(mCodeField.getText().toString()))
-                mCodeFound = true;
-            else
+        switch (mState) {
+            case RED:case GREEN:case YELLOW:case BLUE:
+                if (mCodeField.length() < 4) {
+                    mCodeField.setText(mCodeField.getText() + key);
+                }
+                if (mCodeField.length() == 4) {
+                    if (code.equals(mCodeField.getText().toString())) {
+                        mCodeFound = true;
+                        mState = State.UNLOCKED;
+                    }
+                    else{
+                        mCodeFound = false;
+                        mCodeField.setText("");
+                        mState = State.CODEWRONG;
+                    }
+
+                }
+                break;
+            case UNLOCKED: case CODEWRONG:
                 mCodeField.setText("");
         }
-    }
+            }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

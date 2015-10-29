@@ -7,9 +7,8 @@ import android.content.SharedPreferences;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.Window;
 import fr.ihm.secureme.R;
-import fr.ihm.secureme.dialog.AbstractKeyPadDialog;
+import fr.ihm.secureme.callback.KeyPadDialogCallBack;
 import fr.ihm.secureme.dialog.CheckCodeKeyPadDialog;
 import fr.ihm.secureme.dialog.ConfirmCodeKeyPadDialog;
 import fr.ihm.secureme.dialog.CreateCodeKeyPadDialog;
@@ -17,7 +16,7 @@ import fr.ihm.secureme.dialog.CreateCodeKeyPadDialog;
 /**
  * Created by nonau on 17/10/15.
  */
-public class KeyPadPreference extends Preference implements KeyPadPreferenceInterface {
+public class KeyPadPreference extends Preference implements KeyPadDialogCallBack {
 
 
     String mFirstCode;

@@ -3,17 +3,15 @@ package fr.ihm.secureme.dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import fr.ihm.secureme.R;
-import fr.ihm.secureme.preferences.KeyPadPreference;
-import fr.ihm.secureme.preferences.KeyPadPreferenceInterface;
+import fr.ihm.secureme.callback.KeyPadDialogCallBack;
 
 /**
  * Created by nonau on 18/10/15.
  */
 public class CreateCodeKeyPadDialog extends AbstractKeyPadDialog {
-    public CreateCodeKeyPadDialog(Context context, KeyPadPreferenceInterface keyPadPreferenceInterface) {
-        super(context, keyPadPreferenceInterface);
+    public CreateCodeKeyPadDialog(Context context, KeyPadDialogCallBack keyPadDialogCallBack) {
+        super(context, keyPadDialogCallBack);
 
     }
 
@@ -36,7 +34,7 @@ public class CreateCodeKeyPadDialog extends AbstractKeyPadDialog {
             public void onClick(View v) {
                 setCode();
                 dismiss();
-                mKeyPadPreferenceInterface.createCodeCallback(getCode());
+                mKeyPadDialogCallBack.createCodeCallback(getCode());
             }
         });
     }

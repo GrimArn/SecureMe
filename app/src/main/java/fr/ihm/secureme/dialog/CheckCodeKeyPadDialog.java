@@ -4,14 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import fr.ihm.secureme.R;
-import fr.ihm.secureme.preferences.KeyPadPreferenceInterface;
+import fr.ihm.secureme.callback.KeyPadDialogCallBack;
 
 /**
  * Created by nonau on 18/10/15.
  */
 public class CheckCodeKeyPadDialog extends AbstractKeyPadDialog {
-    public CheckCodeKeyPadDialog(Context context, KeyPadPreferenceInterface keyPadPreferenceInterface) {
-        super(context, keyPadPreferenceInterface);
+    public CheckCodeKeyPadDialog(Context context, KeyPadDialogCallBack keyPadDialogCallBack) {
+        super(context, keyPadDialogCallBack);
 
     }
 
@@ -34,7 +34,7 @@ public class CheckCodeKeyPadDialog extends AbstractKeyPadDialog {
             public void onClick(View v) {
                 setCode();
                 dismiss();
-                mKeyPadPreferenceInterface.checkCodeCallback(getCode());
+                mKeyPadDialogCallBack.checkCodeCallback(getCode());
             }
         });
     }

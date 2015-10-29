@@ -8,7 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import fr.ihm.secureme.R;
-import fr.ihm.secureme.preferences.KeyPadPreferenceInterface;
+import fr.ihm.secureme.callback.KeyPadDialogCallBack;
 
 /**
  * Created by nonau on 17/10/15.
@@ -35,12 +35,12 @@ public abstract class AbstractKeyPadDialog extends Dialog {
     protected Button mClearButton;
     protected TextView mMessageDialog;
 
-    protected KeyPadPreferenceInterface mKeyPadPreferenceInterface;
+    protected KeyPadDialogCallBack mKeyPadDialogCallBack;
 
 
-    public AbstractKeyPadDialog(Context context, KeyPadPreferenceInterface keyPadPreferenceInterface) {
+    public AbstractKeyPadDialog(Context context, KeyPadDialogCallBack keyPadDialogCallBack) {
         super(context);
-        mKeyPadPreferenceInterface = keyPadPreferenceInterface;
+        mKeyPadDialogCallBack = keyPadDialogCallBack;
         requestWindowFeature(Window.FEATURE_LEFT_ICON);
         super.setContentView(R.layout.keypad_layout);
         mMessageDialog = (TextView) findViewById(R.id.messagetext);

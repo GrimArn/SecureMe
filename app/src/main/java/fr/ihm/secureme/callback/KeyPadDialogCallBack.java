@@ -1,9 +1,9 @@
-package fr.ihm.secureme.preferences;
+package fr.ihm.secureme.callback;
 
 /**
  * Created by nonau on 19/10/15.
  */
-public interface KeyPadPreferenceInterface {
+public interface KeyPadDialogCallBack {
 
     void createCodeCallback(String code);
     void confirmCodeCallback(String code);

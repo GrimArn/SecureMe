@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SecureMe</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="cancel_text">Cancel</string>
+    <string name="code_changed_message">Your pin has been saved</string>
+    <string name="code_changed_title">Pin saved</string>
+    <string name="confirm_code_text">Confirm pin</string>
+    <string name="confirm_text">Enter</string>
+    <string name="define">Define</string>
+    <string name="define_code_text">Define security pin</string>
+    <string name="enter_code">Enter code</string>
+    <string name="enter_new_code_message">To use this application, you need to enter a security pin</string>
+    <string name="error_not_same_code_message">The pins you entered are not the same</string>
+    <string name="error_title">Error</string>
+    <string name="input_confirm_code">Confirm new pin</string>
+    <string name="input_new_code" translatable="false">Enter new pin</string>
+    <string name="input_old_text">Enter your old pin</string>
+    <string name="pref_emer_contact">Emergency contact</string>
+    <string name="pref_summary_code_text">Unlock pin</string>
+    <string name="pref_summary_emer_num">Emergency contact phone number</string>
+    <string name="pref_summary_emer_text">Emergency message</string>
+    <string name="pref_title_code_text">Unlock pin</string>
+    <string name="pref_title_emer_num">Number</string>
+    <string name="pref_title_emer_text">Text</string>
+    <string name="pref_unlock_contact">Unlock</string>
+    <string name="try_again_message">Try again</string>
+    <string name="welcome">Welcome</string>
+</resources>

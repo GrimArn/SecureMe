@@ -1,5 +1,6 @@
 package fr.ihm.secureme.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -7,21 +8,17 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
 import fr.ihm.secureme.R;
 import fr.ihm.secureme.callback.KeyPadDialogCallBack;
 import fr.ihm.secureme.dialog.ConfirmCodeKeyPadDialog;
 import fr.ihm.secureme.dialog.CreateCodeKeyPadDialog;
 import fr.ihm.secureme.model.ContactListSingleton;
-import fr.ihm.secureme.preferences.KeyPadPreference;
 
-public class SplashScreenActivity extends ActionBarActivity/* implements KeyPadDialogCallBack*/{
+public class SplashScreenActivity extends Activity implements KeyPadDialogCallBack {
     // Splash screen timer
-    private static int SPLASH_TIME_OUT = 3000;
+    private static final int SPLASH_TIME_OUT = 3000;
     private String mFirstCode;
 
     @Override
@@ -32,12 +29,12 @@ public class SplashScreenActivity extends ActionBarActivity/* implements KeyPadD
         TextView appName = (TextView) findViewById(R.id.appname);
         appName.setTypeface(myTypeface);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String code = sharedPreferences.getString("pref_app_code", "NULL");
-        /*if (code.equals("NULL")){
+        String code = sharedPreferences.getString(getString(R.string.key_pref_app_code), getString(R.string.default_non_value_code));
+        if (code.equals(getString(R.string.default_non_value_code))){
             AlertDialog addCodeDialog = new AlertDialog.Builder(this)
-                    .setTitle("Bienvenue !")
-                    .setMessage("Pour utiliser l'application, vous devez rentrer un code de sécurité")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    .setTitle(getString(R.string.welcome))
+                    .setMessage(getString(R.string.enter_new_code_message))
+                    .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             CreateCodeKeyPadDialog keyPadDialog = new CreateCodeKeyPadDialog(SplashScreenActivity.this,
@@ -49,8 +46,9 @@ public class SplashScreenActivity extends ActionBarActivity/* implements KeyPadD
 
                     .create();
             addCodeDialog.show();
-        }*/
-        new Handler().postDelayed(new Runnable() {
+        }
+        else {
+            new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     // This method will be executed once the timer is over
@@ -65,7 +63,9 @@ public class SplashScreenActivity extends ActionBarActivity/* implements KeyPadD
             }, SPLASH_TIME_OUT);
         }
 
-    /*@Override
+        }
+
+    @Override
     public void createCodeCallback(String code) {
         mFirstCode = code;
         ConfirmCodeKeyPadDialog confirmCodeKeyPadDialog = new ConfirmCodeKeyPadDialog(this, this);
@@ -76,14 +76,17 @@ public class SplashScreenActivity extends ActionBarActivity/* implements KeyPadD
     public void confirmCodeCallback(String code) {
         if (mFirstCode.equals(code)) {
             saveCode();
-            AlertDialog errorDialog = new AlertDialog.Builder(getContext())
-                    .setTitle("Code changé")
+            AlertDialog errorDialog = new AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.code_changed_title))
                     .setIcon(R.drawable.ic_check_circle_black_24dp)
-                    .setMessage("Votre nouveau code est enregistré")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    .setMessage(getString(R.string.code_changed_message))
+                    .setPositiveButton(getString(R.string.OK), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
+                            ContactListSingleton.getInstance().loadContactList(SplashScreenActivity.this);
+                            Intent i = new Intent(SplashScreenActivity.this, MainActivity.class);
+                            startActivity(i);
                         }
                     }).setCancelable(false)
 
@@ -92,18 +95,18 @@ public class SplashScreenActivity extends ActionBarActivity/* implements KeyPadD
         }
         else {
             AlertDialog errorDialog = new AlertDialog.Builder(this)
-                    .setTitle("Erreur")
+                    .setTitle(getString(R.string.error_title))
                     .setIcon(R.drawable.ic_error_black_24dp)
-                    .setMessage("Les deux codes ne correspondent pas")
-                    .setPositiveButton("Recommencer", new DialogInterface.OnClickListener() {
+                    .setMessage(getString(R.string.error_not_same_code_message))
+                    .setPositiveButton(getString(R.string.try_again_message), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            CreateCodeKeyPadDialog keyPadDialog = new CreateCodeKeyPadDialog(getContext(), KeyPadPreference.this);
+                            CreateCodeKeyPadDialog keyPadDialog = new CreateCodeKeyPadDialog(SplashScreenActivity.this, SplashScreenActivity.this);
                             keyPadDialog.show();
                             dialog.dismiss();
                         }
                     })
-                    .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getString(R.string.cancel_text), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -114,8 +117,15 @@ public class SplashScreenActivity extends ActionBarActivity/* implements KeyPadD
         }
     }
 
+    private void saveCode() {
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(getString(R.string.key_pref_app_code), mFirstCode);
+        editor.apply();
+    }
+
     @Override
     public void checkCodeCallback(String code) {
 
-    }*/
+    }
 }

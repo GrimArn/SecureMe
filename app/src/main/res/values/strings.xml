@@ -1,44 +1,55 @@
 <resources>
     <string name="app_name">SecureMe</string>
 
-    <string name="hello_world">Ceci est un test</string>
+    <string name="hello_world" translatable="false">Ceci est un test</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_alarm">AlarmActivity</string>
+    <string name="title_activity_alarm" translatable="false">AlarmActivity</string>
 
 <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="hello_settings_fragment">settings</string>
-    <string name="hello_alert_fragment">alert</string>
-    <string name="hello_contact_fragment">contact</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="hello_settings_fragment" translatable="false">settings</string>
+    <string name="hello_alert_fragment" translatable="false">alert</string>
+    <string name="hello_contact_fragment" translatable="false">contact</string>
     <string name="pref_emer_contact">Contact de secours</string>
     <string name="pref_summary_emer_num">Numéro de téléphone du contact d\'urgence</string>
     <string name="pref_title_emer_num">Numéro</string>
     <string name="pref_summary_emer_text">Texte à envoyer au contact d\'urgence</string>
     <string name="pref_title_emer_text">Texte</string>
-    <string name="zero">0</string>
-    <string name="one">1</string>
-    <string name="two">2</string>
-    <string name="three">3</string>
-    <string name="four">4</string>
-    <string name="five">5</string>
-    <string name="six">6</string>
-    <string name="seven">7</string>
-    <string name="eight">8</string>
-    <string name="nine">9</string>
-    <string name="eighteen">18</string>
+    <string name="one" translatable="false">1</string>
+    <string name="two" translatable="false">2</string>
+    <string name="three" translatable="false">3</string>
+    <string name="four" translatable="false">4</string>
+    <string name="five" translatable="false">5</string>
+    <string name="six" translatable="false">6</string>
+    <string name="seven" translatable="false">7</string>
+    <string name="eight" translatable="false">8</string>
+    <string name="nine" translatable="false">9</string>
+    <string name="eighteen" translatable="false">18</string>
     <string name="pref_summary_code_text">Code de déverrouillage</string>
     <string name="pref_title_code_text">Code de déverrouillage</string>
     <string name="pref_unlock_contact">Déverrouillage</string>
     <string name="confirm_text">Valider</string>
     <string name="confirm_code_text">Confirmer code</string>
     <string name="enter_code">Entrer votre code</string>
-    <string name="ok">VALIDER</string>
+    <string name="ok" translatable="false">VALIDER</string>
     <string name="define_code_text">Definir code de sécurité</string>
     <string name="define">Definir</string>
-    <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="title_activity_splash_screen" translatable="false">SplashScreenActivity</string>
     <string name="input_old_text">Renseigner votre ancien code</string>
     <string name="input_confirm_code">Confirmer le nouveau code</string>
     <string name="input_new_code">Saisir votre nouveau code</string>
+    <string name="default_non_value_code" translatable="false">NULL</string>
+    <string name="welcome">Bienvenue !</string>
+    <string name="enter_new_code_message">Pour utiliser l\'application, vous devez rentrer un code de sécurité</string>
+    <string name="OK" translatable="false">Ok</string>
+    <string name="key_pref_app_code" translatable="false">pref_app_code</string>
+    <string name="code_changed_title">Code changé</string>
+    <string name="code_changed_message">Votre nouveau code est enregistré</string>
+    <string name="error_title">Erreur</string>
+    <string name="error_not_same_code_message">Les deux codes ne correspondent pas</string>
+    <string name="try_again_message">Recommencer</string>
+    <string name="cancel_text">Annuler</string>
+    <string name="zero" translatable="false">0</string>
 
 
 </resources>

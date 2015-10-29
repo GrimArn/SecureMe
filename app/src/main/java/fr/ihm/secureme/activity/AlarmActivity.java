@@ -1,7 +1,9 @@
 package fr.ihm.secureme.activity;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
 import android.os.Bundle;
@@ -20,6 +22,8 @@ import java.util.TimerTask;
 public class AlarmActivity extends AppCompatActivity implements View.OnClickListener {
 
     RelativeLayout mActivityBackground;
+    Vibrator mVibrator;
+
     Timer mTimerChangingColor;
     private TextView mCodeField;
 
@@ -33,8 +37,6 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     protected Button mButtonSeven;
     protected Button mButtonEight;
     protected Button mButtonNine;
-
-    private boolean mCodeFound = false;
 
     private State mState;
     enum State {
@@ -54,16 +56,21 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_alarm);
 
         init();
-
-
     }
 
     private void init() {
         mState = State.RED;
+        initVibrate();
         initViews();
         initLight();
         initButtons();
         initTimer();
+    }
+
+    private void initVibrate(){
+        mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        long[] pattern = {100, 5000};
+        mVibrator.vibrate(pattern, 0);
     }
 
     private void initTimer() {
@@ -108,6 +115,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                 tickTimer();
                 break;
             case UNLOCKED:
+                mVibrator.cancel();
                 lightGreen();
                 screenUnlocking();
                 break;
@@ -213,6 +221,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String code = sharedPreferences.getString("pref_app_code", "NULL");
         Log.e("TAG", code);
+
         switch (mState) {
             case RED:case GREEN:case YELLOW:case BLUE:
                 if (mCodeField.length() < 4) {
@@ -220,11 +229,9 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                 }
                 if (mCodeField.length() == 4) {
                     if (code.equals(mCodeField.getText().toString())) {
-                        mCodeFound = true;
                         mState = State.UNLOCKED;
                     }
                     else{
-                        mCodeFound = false;
                         mCodeField.setText("");
                         mState = State.CODEWRONG;
                     }
@@ -234,7 +241,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             case UNLOCKED: case CODEWRONG:
                 mCodeField.setText("");
         }
-            }
+    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

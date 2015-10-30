@@ -14,19 +14,24 @@ import fr.ihm.secureme.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingsFragment extends PreferenceFragment{
+public class SettingsFragment extends PreferenceFragment implements TitleFragmentInterface{
 
 
-    public static CharSequence sTitle = "Paramètres";
+    public static CharSequence sTitle;
 
     public SettingsFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
     public void onCreate(Bundle paramBundle) {
         super.onCreate(paramBundle);
         addPreferencesFromResource(R.xml.preference);
+        sTitle = getActivity().getString(R.string.action_settings);
+    }
 
+    @Override
+    public CharSequence getTitle() {
+        return sTitle;
     }
 }

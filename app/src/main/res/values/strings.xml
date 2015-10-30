@@ -50,6 +50,15 @@
     <string name="try_again_message">Recommencer</string>
     <string name="cancel_text">Annuler</string>
     <string name="zero" translatable="false">0</string>
+    <string name="trigger_states_title">Modes de déclanchement</string>
+    <string name="emergency_contacts_title">Contacts d\'urgence</string>
+    <string name="send_device_coordinates_text">Envoyer les coordonnées GPS de l\'appareil</string>
+    <string name="triggered_alarm_text">Texte provoquant l\'alerte</string>
+    <string name="contact_number_text">Numéro du contact</string>
+    <string name="contact_list_empty_text">Votre liste de contact est vide</string>
+    <string name="contact_list_purpose_text">En cas de perte ou de vol, ces contacts pourront verrouiller votre
+        téléphone à distance
+    </string>
 
 
 </resources>

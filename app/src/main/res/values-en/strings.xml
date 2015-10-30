@@ -26,4 +26,13 @@
     <string name="pref_unlock_contact">Unlock</string>
     <string name="try_again_message">Try again</string>
     <string name="welcome">Welcome</string>
+    <string name="send_device_coordinates_text">Send device GPS coordinates</string>
+    <string name="triggered_alarm_text"></string>
+    <string name="trigger_states_title">Triggering mode</string>
+    <string name="contact_list_empty_text">Your contact list is empty</string>
+    <string name="contact_list_purpose_text">If your device is lost or stolen, those contact may lock your device
+        remotly
+    </string>
+    <string name="contact_number_text">Contact number</string>
+    <string name="emergency_contacts_title">Emergency contacts</string>
 </resources>

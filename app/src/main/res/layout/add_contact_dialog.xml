@@ -13,7 +13,7 @@
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/num_edittext" android:layout_gravity="center_horizontal" android:hint="Numéro du contact"
+                android:id="@+id/num_edittext" android:layout_gravity="center_horizontal" android:hint="@string/contact_number_text"
                 android:layout_weight="7"/>
         <ImageButton
                 android:layout_width="40dp"
@@ -30,10 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/mess_edittext" android:layout_gravity="center_horizontal"
-            android:hint="Texte provoquant l&apos;alerte" android:layout_marginTop="5dp"/>
+            android:hint="@string/triggered_alarm_text" android:layout_marginTop="5dp"/>
     <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Envoyer les coordonnées GPS de l&apos;appareil"
+            android:text="@string/send_device_coordinates_text"
             android:id="@+id/gps_check" android:layout_marginTop="5dp"/>
 </LinearLayout>

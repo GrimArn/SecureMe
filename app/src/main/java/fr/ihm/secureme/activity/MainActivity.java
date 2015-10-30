@@ -1,6 +1,7 @@
 package fr.ihm.secureme.activity;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -12,6 +13,7 @@ import fr.ihm.secureme.adapter.ViewPagerAdapter;
 import fr.ihm.secureme.fragment.AlertFragment;
 import fr.ihm.secureme.fragment.ContactFragment;
 import fr.ihm.secureme.fragment.SettingsFragment;
+import fr.ihm.secureme.fragment.TitleFragmentInterface;
 import fr.ihm.secureme.google.IconSlidingTabLayout;
 import fr.ihm.secureme.google.SlidingTabLayout;
 import fr.ihm.secureme.json.ContactJsonWriter;
@@ -40,22 +42,22 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.ic_settings_white_24dp
     };
     int Numboftabs =3;
-    private List<CharSequence> mListFragment;
+    private List<TitleFragmentInterface> mListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mListFragment = new ArrayList<CharSequence>(Numboftabs);
-        mListFragment.add(AlertFragment.sTitle);
-        mListFragment.add(ContactFragment.sTitle);
-        mListFragment.add(SettingsFragment.sTitle);
+        mListFragment = new ArrayList<TitleFragmentInterface>(Numboftabs);
+        mListFragment.add(new AlertFragment());
+        mListFragment.add(new ContactFragment());
+        mListFragment.add(new SettingsFragment());
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(this,getSupportFragmentManager(),imageResId,Numboftabs);
         ActionBar ab = getSupportActionBar();
         ab.setElevation(0);
-        setActivityTitle(0);
+        getSupportActionBar().setTitle(getString(R.string.trigger_states_title));
         // Assigning ViewPager View and setting the adapter
         pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(adapter);
@@ -88,6 +90,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void setActivityTitle(int i) {
-        getSupportActionBar().setTitle(mListFragment.get(i));
+        getSupportActionBar().setTitle(mListFragment.get(i).getTitle());
     }
 }

@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ContactFragment extends Fragment implements ContactFragmentInterface {
+public class ContactFragment extends Fragment implements ContactFragmentInterface, TitleFragmentInterface {
 
     private static final String TAG = "CardListActivity";
 
@@ -33,7 +33,7 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
     private LayoutInflater mLayoutInflater;
     private View mFragmentView;
     private FloatingActionButton mActionButton;
-    public static CharSequence sTitle = "Contacts d'urgence";
+    public static CharSequence sTitle;
     private State mState;
     private State mDialogHistoState;
     private AddContactDialog mAddContactDialog;
@@ -46,6 +46,7 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
 
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
 
         init(inflater, container);
         mActionButton.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +66,7 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
         mLayoutInflater = inflater;
         mActionButton = (FloatingActionButton) mFragmentView.findViewById(R.id.fab);
         mContactArrayAdapter = new ContactArrayAdapter(getActivity().getApplicationContext(), R.layout.list_item_card, this);
-
+        sTitle = getActivity().getString(R.string.emergency_contacts_title);
 
         //On récupere les contacts en base
         List<Contact> listContact = getContactList();
@@ -105,7 +106,10 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
 
 
     }
-
+    @Override
+    public CharSequence getTitle() {
+        return sTitle;
+    }
 
     private void addButtonEventHandler(){
         switch (mState) {

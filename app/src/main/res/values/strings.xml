@@ -2,7 +2,7 @@
     <string name="app_name">SecureMe</string>
 
     <string name="hello_world" translatable="false">Ceci est un test</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Paramètres</string>
     <string name="title_activity_alarm" translatable="false">AlarmActivity</string>
 
 <!-- TODO: Remove or change this placeholder text -->

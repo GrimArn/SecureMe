@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:paddingLeft="24dp" android:paddingRight="24dp"
+              android:paddingBottom="24dp" android:paddingTop="20dp">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:weightSum="10"
+            android:layout_height="wrap_content">
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/num_edittext" android:layout_gravity="center_horizontal" android:hint="@string/contact_number_text"
+                android:layout_weight="7"/>
+        <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/bt_index"
+                android:background="@drawable/card_button_background"
+                android:src="@drawable/ic_contacts_black_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="false" android:layout_alignParentBottom="false"
+                android:layout_alignParentEnd="false"
+                android:layout_marginRight="5dp" android:layout_gravity="center_vertical" android:layout_weight="2"/>
+    </LinearLayout>
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mess_edittext" android:layout_gravity="center_horizontal"
+            android:hint="@string/triggered_alarm_text" android:layout_marginTop="5dp"/>
+    <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send_device_coordinates_text"
+            android:id="@+id/gps_check" android:layout_marginTop="5dp"/>
+</LinearLayout>

@@ -21,40 +21,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.PaintDrawable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 class SlidingTabStrip extends LinearLayout {
 
-    private int[] imageResId = {
-            fr.ihm.secureme.R.drawable.ic_error_outline_white_24dp,
-            fr.ihm.secureme.R.drawable.ic_wifi_tethering_white_24dp,
-            fr.ihm.secureme.R.drawable.ic_settings_white_24dp
-    };
 
-    private int[] colortabs = {
-            fr.ihm.secureme.R.color.colortab0,
-            fr.ihm.secureme.R.color.colortab1,
-            fr.ihm.secureme.R.color.colortab1,
-            fr.ihm.secureme.R.color.colortab3,
-            fr.ihm.secureme.R.color.colortab3,
-            fr.ihm.secureme.R.color.colortab5,
-            fr.ihm.secureme.R.color.colortab5,
-            fr.ihm.secureme.R.color.colortab7,
-            fr.ihm.secureme.R.color.colortab7,
-            fr.ihm.secureme.R.color.colortab9,
-            fr.ihm.secureme.R.color.colortab9,
-    };
 
 
     private static final int DEFAULT_BOTTOM_BORDER_THICKNESS_DIPS = 0;
@@ -62,19 +36,19 @@ class SlidingTabStrip extends LinearLayout {
     private static final int SELECTED_INDICATOR_THICKNESS_DIPS = 3;
     private static final int DEFAULT_SELECTED_INDICATOR_COLOR = 0xFF33B5E5;
 
-    private final int mBottomBorderThickness;
-    private final Paint mBottomBorderPaint;
+    protected final int mBottomBorderThickness;
+    protected final Paint mBottomBorderPaint;
 
-    private final int mSelectedIndicatorThickness;
-    private final Paint mSelectedIndicatorPaint;
+    protected final int mSelectedIndicatorThickness;
+    protected final Paint mSelectedIndicatorPaint;
 
     private final int mDefaultBottomBorderColor;
 
-    private int mSelectedPosition;
-    private float mSelectionOffset;
+    protected int mSelectedPosition;
+    protected float mSelectionOffset;
 
-    private SlidingTabLayout.TabColorizer mCustomTabColorizer;
-    private final SimpleTabColorizer mDefaultTabColorizer;
+    protected SlidingTabLayout.TabColorizer mCustomTabColorizer;
+    protected final SimpleTabColorizer mDefaultTabColorizer;
     private CharSequence mIcon;
 
     SlidingTabStrip(Context context) {
@@ -117,16 +91,15 @@ class SlidingTabStrip extends LinearLayout {
         invalidate();
     }
 
-    void onViewPagerPageChanged(int position, float positionOffset) {
+    public void onViewPagerPageChanged(int position, float positionOffset) {
         mSelectedPosition = position;
         mSelectionOffset = positionOffset;
         invalidate();
     }
 
+
     @Override
     protected void onDraw(Canvas canvas) {
-
-
         final int height = getHeight();
         final int childCount = getChildCount();
         final SlidingTabLayout.TabColorizer tabColorizer = mCustomTabColorizer != null
@@ -137,8 +110,7 @@ class SlidingTabStrip extends LinearLayout {
         if (childCount > 0) {
             View selectedTitle = getChildAt(mSelectedPosition);
 
-            TextView tv = (TextView) selectedTitle;
-            tv.setText(getIcon(10, mSelectedPosition));
+
             int left = selectedTitle.getLeft();
             int right = selectedTitle.getRight();
             int color = tabColorizer.getIndicatorColor(mSelectedPosition);
@@ -151,9 +123,9 @@ class SlidingTabStrip extends LinearLayout {
 
                 // Draw the selection partway between the tabs
                 View nextTitle = getChildAt(mSelectedPosition + 1);
-                TextView tv1 = (TextView) (nextTitle);
-                tv1.setText(getIcon((int) (mSelectionOffset * 10), mSelectedPosition +1 ));
-                tv.setText(getIcon((int) (10 - (mSelectionOffset * 10)), mSelectedPosition ));
+
+
+
                 left = (int) (mSelectionOffset * nextTitle.getLeft() +
                         (1.0f - mSelectionOffset) * left);
                 right = (int) (mSelectionOffset * nextTitle.getRight() +
@@ -162,8 +134,9 @@ class SlidingTabStrip extends LinearLayout {
 
             mSelectedIndicatorPaint.setColor(color);
 
-            /*canvas.drawRect(left, height - mSelectedIndicatorThickness, right,
-                    height, mSelectedIndicatorPaint);*/
+
+            canvas.drawRect(left, height - mSelectedIndicatorThickness, right,
+                    height, mSelectedIndicatorPaint);
         }
 
         // Thin underline along the entire bottom edge
@@ -183,22 +156,12 @@ class SlidingTabStrip extends LinearLayout {
      * @param ratio of which to blend. 1.0 will return {@code color1}, 0.5 will give an even blend,
      *              0.0 will return {@code color2}.
      */
-    private static int blendColors(int color1, int color2, float ratio) {
+    protected static int blendColors(int color1, int color2, float ratio) {
         final float inverseRation = 1f - ratio;
         float r = (Color.red(color1) * ratio) + (Color.red(color2) * inverseRation);
         float g = (Color.green(color1) * ratio) + (Color.green(color2) * inverseRation);
         float b = (Color.blue(color1) * ratio) + (Color.blue(color2) * inverseRation);
         return Color.rgb((int) r, (int) g, (int) b);
-    }
-
-    public CharSequence getIcon(int offset, int icon) {
-        Drawable image = getResources().getDrawable(imageResId[icon]);
-        image.setBounds(0, 0, image.getIntrinsicWidth(), image.getIntrinsicHeight());
-        image.setColorFilter(getResources().getColor(colortabs[offset]), PorterDuff.Mode.MULTIPLY);
-        SpannableString sb = new SpannableString(" ");
-        ImageSpan imageSpan = new ImageSpan(image, ImageSpan.ALIGN_BOTTOM);
-        sb.setSpan(imageSpan, 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return sb;
     }
 
     public void setIcon(CharSequence icon) {

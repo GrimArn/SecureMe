@@ -4,6 +4,7 @@ package fr.ihm.secureme.adapter;
  * Created by nonau on 09/10/15.
  */
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
@@ -12,20 +13,25 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import android.util.Log;
+import fr.ihm.secureme.activity.MainActivity;
 import fr.ihm.secureme.fragment.AlertFragment;
 import fr.ihm.secureme.fragment.ContactFragment;
 import fr.ihm.secureme.fragment.SettingsFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
+    private static final String TAG = "ViewPagerAdapter";
     int Titles[];
     int NumbOfTabs;
     private Context mContext;
+    private MainActivity mActivity;
 
     // Build a Constructor and assign the passed Values to appropriate values in the class
-    public ViewPagerAdapter(Context c, FragmentManager fm,int mTitles[], int mNumbOfTabsumb) {
+    public ViewPagerAdapter(MainActivity a, FragmentManager fm,int mTitles[], int mNumbOfTabsumb) {
         super(fm);
-        mContext = c;
+        mActivity = a;
+        mContext = a.getBaseContext();
         this.Titles = mTitles;
         this.NumbOfTabs = mNumbOfTabsumb;
 
@@ -34,17 +40,13 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     //This method return the fragment for the every position in the View Pager
     @Override
     public Fragment getItem(int position) {
-
         switch (position) {
             case 0 :
-                AlertFragment alertFragment = new AlertFragment();
-                return alertFragment;
+                return new AlertFragment();
             case 1 :
-                ContactFragment contactFragment = new ContactFragment();
-                return contactFragment;
+                return new ContactFragment();
             case 2 :
-                SettingsFragment settingsFragment = new SettingsFragment();
-                return settingsFragment;
+                return new SettingsFragment();
         }
         return null;
 

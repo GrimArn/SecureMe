@@ -12,7 +12,16 @@
                 android:key="pref_key_emer_text"
                 android:summary="@string/pref_summary_emer_text"
                 android:title="@string/pref_title_emer_text"
-                android:icon="@drawable/ic_wifi_tethering_black_36dp"
                 />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/pref_unlock_contact"
+        android:key="pref_key_unlock">
+        <fr.ihm.secureme.preferences.KeyPadPreference
+                android:key="pref_app_code"
+                android:summary="@string/pref_summary_code_text"
+                android:title="@string/pref_title_code_text"
+                android:icon="@drawable/ic_dialpad_black_24dp"/>
     </PreferenceCategory>
 </PreferenceScreen>

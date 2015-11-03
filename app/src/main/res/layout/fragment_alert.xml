@@ -4,14 +4,64 @@
                 android:layout_height="match_parent">
 
 
-    <TextView
-            android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Tab 2 says Hello :D"
-            android:id="@+id/textView"
-            android:textColor="@color/tabsScrollColor"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:gravity="center_horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/simbutton"
+                android:src="@drawable/sim_fr_off"
+                android:backgroundTint="@color/ColorPrimary"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cablebutton"
+                android:src="@drawable/cable_fr_off"
+                android:backgroundTint="@color/ColorPrimary"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp" />
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mvtbutton"
+                    android:src="@drawable/mvt_fr_off"
+                    android:backgroundTint="@color/ColorPrimary"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp" />
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/distbutton"
+                    android:src="@drawable/distance_fr_off"
+                    android:backgroundTint="@color/ColorPrimary"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:alpha="120"
+                    android:adjustViewBounds="false" />
+            </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

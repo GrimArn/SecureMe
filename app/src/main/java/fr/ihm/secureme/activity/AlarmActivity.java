@@ -3,6 +3,8 @@ package fr.ihm.secureme.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.os.PowerManager;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import fr.ihm.secureme.R;
+import fr.ihm.secureme.manager.SoundAlarmManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,7 +26,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
     RelativeLayout mActivityBackground;
     Vibrator mVibrator;
-
+    SoundAlarmManager mSoundAlarmManager;
     Timer mTimerChangingColor;
     private TextView mCodeField;
 
@@ -55,16 +58,34 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_alarm);
 
+        PowerManager.WakeLock screenLock = ((PowerManager)getSystemService(POWER_SERVICE)).newWakeLock(
+                PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "TAG");
+        screenLock.acquire();
+        screenLock.release();
+
         init();
     }
 
     private void init() {
         mState = State.RED;
         initVibrate();
+        initSound();
         initViews();
         initLight();
         initButtons();
         initTimer();
+    }
+
+    private void initSound() {
+        mSoundAlarmManager = new SoundAlarmManager(this);
+        mSoundAlarmManager.startAlarm();
+        AudioManager am =
+                (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+        am.setStreamVolume(
+                AudioManager.STREAM_MUSIC,
+                am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+                0);
     }
 
     private void initVibrate(){
@@ -177,7 +198,9 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     private void lightYellow() {
         mActivityBackground.setBackgroundColor(getResources().getColor(R.color.yellow));
     }
+
     private void screenUnlocking() {
+        mSoundAlarmManager.stopAlarm();
         mTimerChangingColor.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -245,6 +268,10 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return false;
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN || keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_HOME) {
+            return true;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
     }
 }

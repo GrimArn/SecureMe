@@ -5,11 +5,14 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.Window;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import fr.ihm.secureme.dialog.AddContactDialog;
@@ -55,6 +58,8 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
                 addButtonEventHandler();
             }
         });
+
+
         return mFragmentView;
 
     }
@@ -100,6 +105,30 @@ public class ContactFragment extends Fragment implements ContactFragmentInterfac
                     addContactDialog.setContactFragmentInterface(ContactFragment.this);
                     addContactDialog.show(getActivity(), "addContactDialog");
 
+                }
+            });
+            mListview.setOnScrollListener(new AbsListView.OnScrollListener() {
+                int mLastFirstVisibleItem = 0;
+
+                @Override
+                public void onScrollStateChanged(AbsListView view, int scrollState) {   }
+
+                @Override
+                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                    /*Log.e(TAG, "onscrll");
+                    if (view.getId() == mListview.getId()) {
+                        final int currentFirstVisibleItem = mListview.getFirstVisiblePosition();
+
+                        if (currentFirstVisibleItem > mLastFirstVisibleItem) {
+                            // getSherlockActivity().getSupportActionBar().hide();
+                            ((AppCompatActivity)getActivity()).getSupportActionBar().hide();
+                        } else if (currentFirstVisibleItem < mLastFirstVisibleItem) {
+                            // getSherlockActivity().getSupportActionBar().show();
+                            ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+                        }
+
+                        mLastFirstVisibleItem = currentFirstVisibleItem;
+                    }*/
                 }
             });
         }

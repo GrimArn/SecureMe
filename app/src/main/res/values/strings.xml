@@ -59,6 +59,9 @@
     <string name="contact_list_purpose_text">En cas de perte ou de vol, ces contacts pourront verrouiller votre
         téléphone à distance
     </string>
+    <string name="add_text">Ajouter</string>
+    <string name="edit_text">Editer</string>
+    <string name="an_emergency_contact_text">" un contact d'urgence"</string>
 
 
 </resources>

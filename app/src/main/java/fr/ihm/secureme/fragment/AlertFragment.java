@@ -7,9 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import fr.ihm.secureme.R;
+import com.github.machinarius.preferencefragment.PreferenceFragment;
+
+import java.util.zip.Inflater;
 
 public class AlertFragment extends Fragment implements TitleFragmentInterface{
-
+    private View mFragmentView;
+    private LayoutInflater mLayoutInflater;
 
     public static CharSequence sTitle;
 
@@ -17,15 +21,13 @@ public class AlertFragment extends Fragment implements TitleFragmentInterface{
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        View v = inflater.inflate(R.layout.fragment_alert, container, false);
         sTitle = getActivity().getString(R.string.trigger_states_title);
-        return v;
+        return inflater.inflate(R.layout.fragment_alert, container, false);
     }
+
+
 
     @Override
     public CharSequence getTitle() {

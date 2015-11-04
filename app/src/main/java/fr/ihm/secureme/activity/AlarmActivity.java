@@ -54,7 +54,6 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_alarm);
-
         init();
     }
 

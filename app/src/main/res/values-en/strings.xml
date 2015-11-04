@@ -27,7 +27,7 @@
     <string name="try_again_message">Try again</string>
     <string name="welcome">Welcome</string>
     <string name="send_device_coordinates_text">Send device GPS coordinates</string>
-    <string name="triggered_alarm_text"></string>
+    <string name="triggered_alarm_text">Text provocating the alarm</string>
     <string name="trigger_states_title">Triggering mode</string>
     <string name="contact_list_empty_text">Your contact list is empty</string>
     <string name="contact_list_purpose_text">If your device is lost or stolen, those contact may lock your device
@@ -35,4 +35,11 @@
     </string>
     <string name="contact_number_text">Contact number</string>
     <string name="emergency_contacts_title">Emergency contacts</string>
+    <string name="modes">Triggers</string>
+    <string name="trig_1_name">trig1en</string>
+    <string name="trig_2_name">trig2en</string>
+    <string name="trig_3_name">trig3en</string>
+    <string name="trig_1_summ">trig1summen</string>
+    <string name="trig_2_summ">trig2summen</string>
+    <string name="trig_3_summ">trig3summen</string>
 </resources>

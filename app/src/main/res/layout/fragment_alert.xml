@@ -22,18 +22,18 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/simbutton"
                 android:src="@drawable/sim_fr_off"
-                android:backgroundTint="@color/ColorPrimary"
                 android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp" />
+                android:layout_marginRight="5dp"
+                android:backgroundTint="#ffffff" />
 
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/cablebutton"
                 android:src="@drawable/cable_fr_off"
-                android:backgroundTint="@color/ColorPrimary"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp" />
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="#ffffff" />
         </LinearLayout>
 
         <LinearLayout
@@ -47,20 +47,20 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/mvtbutton"
                     android:src="@drawable/mvt_fr_off"
-                    android:backgroundTint="@color/ColorPrimary"
                     android:layout_marginRight="5dp"
-                    android:layout_marginTop="10dp" />
+                    android:layout_marginTop="10dp"
+                    android:backgroundTint="#ffffff" />
 
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/distbutton"
                     android:src="@drawable/distance_fr_off"
-                    android:backgroundTint="@color/ColorPrimary"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
                     android:alpha="120"
-                    android:adjustViewBounds="false" />
+                    android:adjustViewBounds="false"
+                    android:backgroundTint="#ffffff" />
             </LinearLayout>
     </LinearLayout>
 

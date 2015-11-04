@@ -32,7 +32,7 @@
         </activity>
         <activity
             android:name=".activity.TriggerActivity"
-            android:label="blabla"
+            android:label="SecureMe"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:parentActivityName=".activity.MainActivity" >

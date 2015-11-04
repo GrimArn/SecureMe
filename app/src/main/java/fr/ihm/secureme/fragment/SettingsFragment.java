@@ -14,7 +14,7 @@ import fr.ihm.secureme.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SettingsFragment extends PreferenceFragment implements TitleFragmentInterface{
+public class SettingsFragment extends PreferenceFragment implements TitleFragmentInterface {
 
 
     public static CharSequence sTitle;

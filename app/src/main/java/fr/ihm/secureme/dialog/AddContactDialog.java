@@ -52,9 +52,9 @@ public class AddContactDialog extends DialogFragment {
         messTextField = (EditText) mView.findViewById(R.id.mess_edittext);
         indexImageButton = (ImageButton) mView.findViewById(R.id.bt_index);
         gpsCheckbox = (CheckBox) mView.findViewById(R.id.gps_check);
-        mTitle = "Ajouter";
+        mTitle = getActivity().getString(R.string.add_text);
         if (args.containsKey("isEdit") && args.getBoolean("isEdit")) {
-            mTitle = "Editer";
+            mTitle = getActivity().getString(R.string.edit_text);
             numTextField.setText(args.getString("num"));
             messTextField.setText(args.getString("mess"));
             gpsCheckbox.setChecked(args.getBoolean("gps"));
@@ -150,8 +150,8 @@ public class AddContactDialog extends DialogFragment {
                     }
                 })
                 .setIcon(ressource)
-                .setTitle(mTitle + " un contact d'urgence")
-                .setNegativeButton("ANNULER", new DialogInterface.OnClickListener() {
+                .setTitle(mTitle + getActivity().getString(R.string.an_emergency_contact_text))
+                .setNegativeButton(getActivity().getString(R.string.cancel_text), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         AddContactDialog.this.getDialog().cancel();
                         mContactFragmentInterface.dialogCancelHandler();

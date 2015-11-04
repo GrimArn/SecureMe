@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Window;
 import fr.ihm.secureme.R;
 import fr.ihm.secureme.adapter.ViewPagerAdapter;
 import fr.ihm.secureme.fragment.AlertFragment;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mListFragment = new ArrayList<TitleFragmentInterface>(Numboftabs);

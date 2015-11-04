@@ -31,6 +31,17 @@
 
         </activity>
         <activity
+            android:name=".activity.TriggerActivity"
+            android:label="blabla"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".activity.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.MainActivity" />>
+
+        </activity>
+        <activity
             android:name=".activity.AlarmActivity"
             android:label="@string/title_activity_alarm"
             android:screenOrientation="portrait"

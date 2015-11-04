@@ -5,7 +5,7 @@
     <string name="action_settings">Paramètres</string>
     <string name="title_activity_alarm" translatable="false">AlarmActivity</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="hello_settings_fragment" translatable="false">settings</string>
     <string name="hello_alert_fragment" translatable="false">alert</string>
@@ -59,12 +59,9 @@
     <string name="contact_list_purpose_text">En cas de perte ou de vol, ces contacts pourront verrouiller votre
         téléphone à distance
     </string>
-    <string name="modes">Déclenchement</string>
-    <string name="trig_1_name">trig1fr</string>
-    <string name="trig_2_name">trig2fr</string>
-    <string name="trig_3_name">trig3fr</string>
-    <string name="trig_1_summ">trig1summfr</string>
-    <string name="trig_2_summ">trig2summfr</string>
-    <string name="trig_3_summ">trig3summfr</string>
+    <string name="add_text">Ajouter</string>
+    <string name="edit_text">Editer</string>
+    <string name="an_emergency_contact_text">" un contact d'urgence"</string>
+
 
 </resources>

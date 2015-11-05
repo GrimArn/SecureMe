@@ -4,64 +4,77 @@
                 android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">>
-        <LinearLayout
-            android:orientation="horizontal"
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/simbutton"
-                android:src="@drawable/sim_fr_off"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
-                android:backgroundTint="#ffffff" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/cablebutton"
-                android:src="@drawable/cable_fr_off"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
-                android:backgroundTint="#ffffff" />
-        </LinearLayout>
-
+            android:id="@+id/scrollView">
         <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal">
-
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">>
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" android:weightSum="2">
                 <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:id="@+id/mvtbutton"
                     android:src="@drawable/mvt_fr_off"
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="#ffffff" />
+                    android:background="@drawable/trigger_button" android:layout_marginLeft="5dp"
+                    android:layout_weight="1">
+                </ImageButton>
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/simbutton"
+                    android:src="@drawable/sim_fr_off"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/trigger_button"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal" android:weightSum="2">
 
                 <ImageButton
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/distbutton"
-                    android:src="@drawable/distance_fr_off"
+                    android:id="@+id/cablebutton"
+                    android:src="@drawable/cable_fr_off"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
-                    android:alpha="120"
-                    android:adjustViewBounds="false"
-                    android:backgroundTint="#ffffff" />
+                    android:layout_weight="1"
+                    android:background="@drawable/trigger_button"/>
+                <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/distbutton"
+                        android:src="@drawable/distance_fr_off"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
+                        android:alpha="120"
+                        android:adjustViewBounds="false"
+                        android:layout_weight="1"
+                        android:background="@drawable/trigger_button" android:layout_marginRight="5dp"/>
             </LinearLayout>
-    </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal">
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

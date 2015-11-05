@@ -67,5 +67,8 @@
     <string name="contact_number_text">Contact number</string>
 
     <string name="emergency_contacts_title">Emergency contacts</string>
+    <string name="add_text">Add</string>
+    <string name="an_emergency_contact_text">an emergency contact</string>
+    <string name="edit_text">Edit</string>
 
 </resources>

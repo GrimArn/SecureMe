@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -47,6 +48,9 @@ public class AddContactDialog extends DialogFragment {
     }
 
     public void init (Bundle args) {
+
+
+
         mState = State.EMPTY;
         numTextField = (EditText) mView.findViewById(R.id.num_edittext);
         messTextField = (EditText) mView.findViewById(R.id.mess_edittext);
@@ -150,7 +154,7 @@ public class AddContactDialog extends DialogFragment {
                     }
                 })
                 .setIcon(ressource)
-                .setTitle(mTitle + getActivity().getString(R.string.an_emergency_contact_text))
+                .setTitle(mTitle + " " + getActivity().getString(R.string.an_emergency_contact_text))
                 .setNegativeButton(getActivity().getString(R.string.cancel_text), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         AddContactDialog.this.getDialog().cancel();

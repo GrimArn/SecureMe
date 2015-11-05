@@ -62,6 +62,7 @@
     <string name="add_text">Ajouter</string>
     <string name="edit_text">Editer</string>
     <string name="an_emergency_contact_text">" un contact d'urgence"</string>
+    <string name="mouvement">Mouvement</string>
 
 
 </resources>

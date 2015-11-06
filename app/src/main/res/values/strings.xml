@@ -63,6 +63,7 @@
     <string name="edit_text">Editer</string>
     <string name="an_emergency_contact_text">" un contact d'urgence"</string>
     <string name="mouvement">Mouvement</string>
+    <string name="sim">Détection de Sim</string>
 
 
 </resources>

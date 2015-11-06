@@ -70,5 +70,7 @@
     <string name="add_text">Add</string>
     <string name="an_emergency_contact_text">an emergency contact</string>
     <string name="edit_text">Edit</string>
+    <string name="mouvement">Movement</string>
+    <string name="sim">Sim Detection</string>
 
 </resources>

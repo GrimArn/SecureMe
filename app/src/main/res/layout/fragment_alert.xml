@@ -49,7 +49,7 @@
                                         android:id="@+id/mvt_icon"
                                         android:layout_alignParentLeft="true"
                                         android:layout_alignParentTop="true"
-                                        android:src="@drawable/mvt_fr_off"
+                                        android:src="@drawable/ic_screen_rotation_white_48dp"
                                         />
                                 <TextView
                                         android:layout_width="wrap_content"
@@ -59,25 +59,27 @@
                                         android:textSize="15sp"
                                         android:text="@string/mouvement"
                                         android:textAlignment="center" android:textColor="@color/white"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                    android:orientation="horizontal"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="fill_parent" android:layout_marginTop="5dp">
-                                <Button
-                                        style="?android:attr/borderlessButtonStyle"
-                                        android:textColor="@color/colorAccent"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="En savoir +"
-                                        android:id="@+id/button" android:textSize="10sp" android:layout_gravity="left"/>
-                                <Button
-                                        style="?android:attr/borderlessButtonStyle"
-                                        android:textColor="@color/colorAccent"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Activer"
-                                        android:id="@+id/button10" android:textSize="10sp" android:layout_gravity="right"/>
+
+                                <LinearLayout
+                                        android:orientation="horizontal"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent" android:layout_marginTop="5dp">
+                                    <ImageButton
+                                            style="?android:attr/borderlessButtonStyle"
+                                            android:textColor="@color/colorAccent"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                        android:id="@+id/button" android:textSize="10sp" android:layout_gravity="left"
+                                        android:src="@drawable/ic_settings_white_24dp" />
+
+                                    <Switch
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="match_parent"
+                                        android:id="@+id/switch1"
+                                        android:layout_gravity="right"
+                                        android:paddingRight="10dp" />
+
+                                </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
 
@@ -112,7 +114,7 @@
                                         android:id="@+id/sim_icon"
                                         android:layout_alignParentLeft="true"
                                         android:layout_alignParentTop="true"
-                                        android:src="@drawable/sim_fr_off"
+                                        android:src="@drawable/ic_no_sim_white_48dp"
                                         />
                                 <TextView
                                         android:layout_width="wrap_content"
@@ -120,27 +122,29 @@
                                         android:id="@+id/sim_text"
                                         android:layout_alignParentTop="true"
                                         android:textSize="15sp"
-                                        android:text="@string/mouvement"
+                                        android:text="@string/sim"
                                         android:textAlignment="center" android:textColor="@color/white"/>
-                            </LinearLayout>
-                            <LinearLayout
-                                    android:orientation="horizontal"
-                                    android:layout_width="fill_parent"
-                                    android:layout_height="fill_parent" android:layout_marginTop="5dp">
-                                <Button
-                                        style="?android:attr/borderlessButtonStyle"
-                                        android:textColor="@color/colorAccent"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="En savoir +"
-                                        android:id="@+id/buttonsav" android:textSize="10sp" android:layout_gravity="left"/>
-                                <Button
-                                        style="?android:attr/borderlessButtonStyle"
-                                        android:textColor="@color/colorAccent"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Activer"
-                                        android:id="@+id/buttonact" android:textSize="10sp" android:layout_gravity="right"/>
+
+                                <LinearLayout
+                                        android:orientation="horizontal"
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="fill_parent" android:layout_marginTop="5dp">
+                                    <ImageButton
+                                            style="?android:attr/borderlessButtonStyle"
+                                            android:textColor="@color/colorAccent"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="En savoir +"
+                                            android:id="@+id/buttonsav" android:textSize="10sp" android:layout_gravity="left"
+                                        android:src="@drawable/ic_settings_white_24dp" />
+
+                                    <Switch
+                                        android:layout_width="fill_parent"
+                                        android:layout_height="match_parent"
+                                        android:id="@+id/switch2"
+                                        android:paddingRight="10dp" />
+
+                                </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
 
@@ -158,7 +162,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/cablebutton"
-                    android:src="@drawable/cable_fr_off"
+                    android:src="@drawable/ic_cable_off"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
@@ -167,7 +171,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/distbutton"
-                        android:src="@drawable/distance_fr_off"
+                        android:src="@drawable/ic_location_off_white_48dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="5dp"
                         android:alpha="120"

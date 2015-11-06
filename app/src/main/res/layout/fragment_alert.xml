@@ -11,7 +11,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
@@ -25,7 +25,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/mvt"
-                        android:layout_weight="1" android:layout_marginRight="5dp" android:layout_marginLeft="5dp">
+                        android:layout_weight="1" android:layout_marginRight="2.5dp" android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp">
 
                     <RelativeLayout
                             android:layout_width="match_parent"
@@ -35,8 +36,7 @@
                         <LinearLayout
                                 android:orientation="vertical"
                                 android:layout_width="fill_parent"
-                                android:layout_height="fill_parent" android:gravity="center_horizontal"
-                                >
+                                android:layout_height="match_parent" android:gravity="center_horizontal">
                             <LinearLayout
                                     android:orientation="vertical"
                                     android:layout_width="fill_parent"
@@ -60,26 +60,29 @@
                                         android:text="@string/mouvement"
                                         android:textAlignment="center" android:textColor="@color/white"/>
 
-                                <LinearLayout
-                                        android:orientation="horizontal"
-                                        android:layout_width="fill_parent"
-                                        android:layout_height="fill_parent" android:layout_marginTop="5dp">
-                                    <ImageButton
-                                            style="?android:attr/borderlessButtonStyle"
-                                            android:textColor="@color/colorAccent"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                        android:id="@+id/button" android:textSize="10sp" android:layout_gravity="left"
-                                        android:src="@drawable/ic_settings_white_24dp" />
+                            </LinearLayout>
 
-                                    <Switch
-                                        android:layout_width="fill_parent"
-                                        android:layout_height="match_parent"
-                                        android:id="@+id/switch1"
-                                        android:layout_gravity="right"
-                                        android:paddingRight="10dp" />
+                            <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent" android:layout_marginTop="5dp">
+                                <ImageButton
+                                        style="?android:attr/borderlessButtonStyle"
+                                        android:textColor="@color/colorAccent"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="fill_parent"
+                                    android:id="@+id/configmvt" android:textSize="10sp" android:layout_gravity="left"
+                                    android:src="@drawable/ic_setting_light"
+                                    android:tint="@color/ColorPrimaryDark" />
 
-                                </LinearLayout>
+                                <Switch
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:id="@+id/switchmvt"
+                                    android:layout_gravity="right"
+                                    android:paddingRight="10dp"
+                                    android:elegantTextHeight="false" />
+
                             </LinearLayout>
                         </LinearLayout>
 
@@ -90,7 +93,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/sim"
-                        android:layout_weight="1" android:layout_marginRight="5dp">
+                        android:layout_weight="1" android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="2.5dp">
 
                     <RelativeLayout
                             android:layout_width="match_parent"
@@ -125,26 +130,28 @@
                                         android:text="@string/sim"
                                         android:textAlignment="center" android:textColor="@color/white"/>
 
-                                <LinearLayout
-                                        android:orientation="horizontal"
-                                        android:layout_width="fill_parent"
-                                        android:layout_height="fill_parent" android:layout_marginTop="5dp">
-                                    <ImageButton
-                                            style="?android:attr/borderlessButtonStyle"
-                                            android:textColor="@color/colorAccent"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="En savoir +"
-                                            android:id="@+id/buttonsav" android:textSize="10sp" android:layout_gravity="left"
-                                        android:src="@drawable/ic_settings_white_24dp" />
+                            </LinearLayout>
 
-                                    <Switch
-                                        android:layout_width="fill_parent"
-                                        android:layout_height="match_parent"
-                                        android:id="@+id/switch2"
-                                        android:paddingRight="10dp" />
+                            <LinearLayout
+                                    android:orientation="horizontal"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent" android:layout_marginTop="5dp">
+                                <ImageButton
+                                        style="?android:attr/borderlessButtonStyle"
+                                        android:textColor="@color/colorAccent"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="En savoir +"
+                                        android:id="@+id/configsim" android:textSize="10sp" android:layout_gravity="left"
+                                    android:src="@drawable/ic_setting_light"
+                                    android:tint="@color/ColorPrimaryDark" />
 
-                                </LinearLayout>
+                                <Switch
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/switchsim"
+                                    android:paddingRight="10dp" />
+
                             </LinearLayout>
                         </LinearLayout>
 
@@ -154,39 +161,147 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal" android:weightSum="2">
-
-                <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" android:weightSum="2" android:paddingBottom="15dp">
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cablebutton"
-                    android:src="@drawable/ic_cable_off"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/trigger_button"/>
-                <ImageButton
+                    android:id="@+id/cable"
+                    android:layout_weight="1" android:layout_marginRight="2.5dp" android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp">
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/distbutton"
-                        android:src="@drawable/ic_location_off_white_48dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="5dp"
-                        android:alpha="120"
-                        android:adjustViewBounds="false"
-                        android:layout_weight="1"
-                        android:background="@drawable/trigger_button" android:layout_marginRight="5dp"/>
-            </LinearLayout>
+                        >
 
-            <LinearLayout
-                    android:orientation="horizontal"
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent" android:gravity="center_horizontal">
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent" android:gravity="center_horizontal"
+                                android:background="@color/ColorPrimaryLight" android:paddingTop="5dp"
+                                android:paddingBottom="5dp">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/cable_icon"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentTop="true"
+                                    android:src="@drawable/ic_cable_off"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/cable_text"
+                                    android:layout_alignParentTop="true"
+                                    android:textSize="15sp"
+                                    android:text="@string/cable"
+                                    android:textAlignment="center" android:textColor="@color/white"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent" android:layout_marginTop="5dp">
+                                <ImageButton
+                                    style="?android:attr/borderlessButtonStyle"
+                                    android:textColor="@color/colorAccent"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="fill_parent"
+                                    android:id="@+id/configcable" android:textSize="10sp" android:layout_gravity="left"
+                                    android:src="@drawable/ic_setting_light"
+                                    android:tint="@color/ColorPrimaryDark" />
+
+                                <Switch
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="fill_parent"
+                                    android:id="@+id/switchcable"
+                                    android:layout_gravity="right"
+                                    android:paddingRight="10dp"
+                                    android:elegantTextHeight="false" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
+                    android:id="@+id/dist"
+                    android:layout_weight="1" android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="2.5dp">
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent" android:gravity="center_horizontal"
+                            >
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent" android:gravity="center_horizontal"
+                                android:background="@color/ColorPrimaryLight" android:paddingTop="5dp"
+                                android:paddingBottom="5dp">
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/dist_icon"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_alignParentTop="true"
+                                    android:src="@drawable/ic_location_off_white_48dp"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/dist_text"
+                                    android:layout_alignParentTop="true"
+                                    android:textSize="15sp"
+                                    android:text="@string/distance"
+                                    android:textAlignment="center" android:textColor="@color/white"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="horizontal"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent" android:layout_marginTop="5dp">
+                                <ImageButton
+                                    style="?android:attr/borderlessButtonStyle"
+                                    android:textColor="@color/colorAccent"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="En savoir +"
+                                    android:id="@+id/configdist" android:textSize="10sp" android:layout_gravity="left"
+                                    android:src="@drawable/ic_setting_light"
+                                    android:tint="@color/ColorPrimaryDark" />
+
+                                <Switch
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/switchdist"
+                                    android:paddingRight="10dp" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

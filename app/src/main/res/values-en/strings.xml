@@ -72,5 +72,7 @@
     <string name="edit_text">Edit</string>
     <string name="mouvement">Movement</string>
     <string name="sim">Sim Detection</string>
+    <string name="distance">Distance detection</string>
+    <string name="cable">Unplugging cable</string>
 
 </resources>

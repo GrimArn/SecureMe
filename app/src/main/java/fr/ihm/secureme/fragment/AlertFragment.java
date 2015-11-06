@@ -40,17 +40,17 @@ public class AlertFragment extends Fragment implements TitleFragmentInterface{
         sTitle = getActivity().getString(R.string.trigger_states_title);
         mFragmentView = inflater.inflate(R.layout.fragment_alert, container, false);
         mLayoutInflater = inflater;
-        //buttonsim = (ImageButton) mFragmentView.findViewById(R.id.simbutton);
-        buttoncable = (ImageButton) mFragmentView.findViewById(R.id.cablebutton);
-        buttondist = (ImageButton) mFragmentView.findViewById(R.id.distbutton);
-        //buttonmvt = (ImageButton) mFragmentView.findViewById(R.id.mvtbutton);
+        buttonsim = (ImageButton) mFragmentView.findViewById(R.id.configsim);
+        buttoncable = (ImageButton) mFragmentView.findViewById(R.id.configcable);
+        buttondist = (ImageButton) mFragmentView.findViewById(R.id.configdist);
+        buttonmvt = (ImageButton) mFragmentView.findViewById(R.id.configmvt);
 
-       /* buttonsim.setOnClickListener(new View.OnClickListener() {
+       buttonsim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 simButtonEventHandler();
             }
-        });*/
+        });
         buttoncable.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,12 +63,12 @@ public class AlertFragment extends Fragment implements TitleFragmentInterface{
                 distButtonEventHandler();
             }
         });
-       /* buttonmvt.setOnClickListener(new View.OnClickListener() {
+        buttonmvt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mvtButtonEventHandler();
             }
-        });*/
+        });
         return mFragmentView;
     }
 

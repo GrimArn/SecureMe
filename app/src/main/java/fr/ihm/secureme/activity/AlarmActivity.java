@@ -1,7 +1,9 @@
 package fr.ihm.secureme.activity;
 
 
+import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
@@ -48,6 +50,24 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         CODEWRONG
     }
 
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        if (mState != State.UNLOCKED) {
+            Intent intent = new Intent(this, AlarmActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (!hasFocus) {
+            /*LANCER LA NOUVELLE ALARME : Intent intent = new Intent(new AlarmActivity(), AlarmActivity.class);
+            startActivity(intent);*/
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +154,10 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     protected void onDestroy() {
         super.onDestroy();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        if (mState != State.UNLOCKED) {
+            Intent intent = new Intent(this, AlarmActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void initButtons() {
@@ -209,14 +233,14 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         Button btnClicked = (Button) v;
-        onKeyPressed(btnClicked.getText().toString());
+        KeyPressed(btnClicked.getText().toString());
     }
 
     @Override
     public void onBackPressed() {
     }
 
-    private void onKeyPressed(String key){
+    private void KeyPressed(String key){
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String code = sharedPreferences.getString("pref_app_code", "NULL");
         Log.e("TAG", code);
@@ -241,9 +265,16 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                 mCodeField.setText("");
         }
     }
+    /*
+    @Override
+    public void onAttachedToWindow() {
+        this.getWindow().setType(WindowManager.LayoutParams.TYPE_KEYGUARD_DIALOG);
+        KeyguardManager keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+        //KeyguardManager.KeyguardLock lock = keyguardManager.newKeyguardLock(KEYGUARD_SERVICE);
+        //lock.disableKeyguard();
+    }*/
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return false;
+    public boolean onKeyDown(int keyCode, KeyEvent event) {return false;
     }
 }

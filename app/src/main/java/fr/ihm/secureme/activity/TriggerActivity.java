@@ -30,14 +30,26 @@ public class TriggerActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             String extra_mode = intent.getStringExtra("EXTRA_mode");
-            if (extra_mode.equals("mvt")) {
-                mode = Mode.MVT;
-            } else if (extra_mode.equals("dist")) {
-                mode = Mode.DIST;
-            } else if (extra_mode.equals("cable")) {
-                mode = Mode.CABLE;
-            } else if (extra_mode.equals("sim")) {
-                mode = Mode.SIM;
+            switch (extra_mode){
+                case "mvt":
+                    mode = Mode.MVT;
+                    break;
+                case "dist":
+                    mode = Mode.DIST;
+                    break;
+                case "cable":
+                    mode = Mode.CABLE;
+                    break;
+                case "sim":
+                    mode = Mode.SIM;
+                    break;
+                default :
+                    try {
+                        Log.e("Not existing mode ",extra_mode);
+                        throw new NotExistingModeException(" (mode wanted : "+extra_mode+")");
+                    } catch (NotExistingModeException e) {
+                        return;
+                    }
             }
             initView();
             initListener();
@@ -147,6 +159,12 @@ public class TriggerActivity extends AppCompatActivity {
                     activator.setChecked(true);
                 }
                 break;
+        }
+    }
+
+    private class NotExistingModeException extends Exception {
+        NotExistingModeException(String mode){
+            super(mode);
         }
     }
 }

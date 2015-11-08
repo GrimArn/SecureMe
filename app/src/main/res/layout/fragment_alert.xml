@@ -49,6 +49,8 @@
                                         android:id="@+id/mvt_icon"
                                         android:layout_alignParentLeft="true"
                                         android:layout_alignParentTop="true"
+                                        android:scaleType="fitStart"
+                                        android:layout_weight="1"
                                         android:src="@drawable/ic_screen_rotation_white_48dp"
                                         />
                                 <TextView
@@ -57,6 +59,7 @@
                                         android:id="@+id/mvt_text"
                                         android:layout_alignParentTop="true"
                                         android:textSize="15sp"
+                                        android:layout_weight="1"
                                         android:text="@string/mouvement"
                                         android:textAlignment="center" android:textColor="@color/white"/>
 

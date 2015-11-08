@@ -74,5 +74,11 @@
     <string name="sim">Sim Detection</string>
     <string name="distance">Distance detection</string>
     <string name="cable">Unplugging cable</string>
+    <string name="simdesc">Trigger the alarm when the Sim-card has been removed or changed</string>
+    <string name="timersetter">Set the time before the alarm start to ring</string>
+    <string name="activermode">Activate the mode</string>
+    <string name="mvtdesc">Trigger the alarm when the phone is beeing moved after a given time</string>
+    <string name="distdesc">Trigger the alarm when the phone is beeing taken away of a given area</string>
+    <string name="cabledesc">Trigger the alarm when the cable is unplugged</string>
 
 </resources>

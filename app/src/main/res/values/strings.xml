@@ -66,6 +66,10 @@
     <string name="sim">Détection de Sim</string>
     <string name="distance">Détection de distance</string>
     <string name="cable">Débranchement du cable</string>
-
-
+    <string name="simdesc">Déclenche l\'alarme si la carte sim a été enlevée ou changée</string>
+    <string name="timersetter">Régler le temps avant l\'activation du mode</string>
+    <string name="activermode">Activer le mode</string>
+    <string name="mvtdesc">Déclence l\'alarme si le téléphone est déplacé après un temps défini</string>
+    <string name="distdesc">Déclence l\'alarme si le téléphone s\'éloigne d\'une distance définie de la position initiale</string>
+    <string name="cabledesc">Déclence l\'alarme quand le cable du téléphone est débranché</string>
 </resources>

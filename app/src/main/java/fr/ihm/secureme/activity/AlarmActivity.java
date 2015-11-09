@@ -1,6 +1,7 @@
 package fr.ihm.secureme.activity;
 
 
+import android.app.ActionBar;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
@@ -54,10 +55,6 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStop(){
         super.onStop();
-        if (mState != State.UNLOCKED) {
-            Intent intent = new Intent(this, AlarmActivity.class);
-            startActivity(intent);
-        }
     }
 
     @Override
@@ -74,6 +71,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_alarm);
+        Timer timer = new Timer();
         init();
     }
 
@@ -150,14 +148,15 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         mCodeField = (TextView) findViewById(R.id.code_tv);
     }
 
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+    protected void onPause() {
         if (mState != State.UNLOCKED) {
             Intent intent = new Intent(this, AlarmActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         }
+        super.onPause();
     }
 
     private void initButtons() {

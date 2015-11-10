@@ -38,6 +38,8 @@ public class SmsBroadcastReceiver extends BroadcastReceiver{
                     String message = currentMessage.getDisplayMessageBody();
                     List<Contact> contacts = ContactListSingleton.getInstance().loadContactList(context);
                     for (Contact c : contacts) {
+                        Log.e("RECEVER", c.getFormatedNum());
+                        Log.e("RECEVER", phoneNumber);
                         if (c.getFormatedNum().equals(phoneNumber) && c.getMessage().equals(message)) {
                             if (c.isGps()) {
                                 LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);

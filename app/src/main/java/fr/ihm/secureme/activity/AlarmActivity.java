@@ -16,6 +16,7 @@ import android.view.*;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import fr.ihm.secureme.R;
 
 import java.util.Timer;
@@ -269,6 +270,17 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     }*/
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {return false;
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
+            Toast.makeText(this, "Volume Up", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
+            Toast.makeText(this, "Volume Down", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 }

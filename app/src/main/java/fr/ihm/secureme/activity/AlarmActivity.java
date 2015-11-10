@@ -58,15 +58,6 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (!hasFocus) {
-            /*LANCER LA NOUVELLE ALARME : Intent intent = new Intent(new AlarmActivity(), AlarmActivity.class);
-            startActivity(intent);*/
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -86,7 +77,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
     private void initVibrate(){
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        long[] pattern = {100, 5000};
+        long[] pattern = {100, 300};
         mVibrator.vibrate(pattern, 0);
     }
 
@@ -106,7 +97,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
             }
-        }, 50);
+        }, 100);
     }
 
     private void timerHandler() {
@@ -151,10 +142,14 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onPause() {
-        if (mState != State.UNLOCKED) {
-            Intent intent = new Intent(this, AlarmActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (mState != State.UNLOCKED){
+            Intent intent = new Intent(getApplicationContext(), AlarmActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT|Intent.FLAG_ACTIVITY_CLEAR_TOP );
+            intent.setAction(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_LAUNCHER);
+            Log.e("paused now", "fuuuuu");
             startActivity(intent);
+            Log.e("activity", "started");
         }
         super.onPause();
     }

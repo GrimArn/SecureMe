@@ -56,7 +56,7 @@
 
     <string name="send_device_coordinates_text">Send device GPS coordinates</string>
 
-    <string name="triggered_alarm_text"/>
+    <string name="triggered_alarm_text">Text triggering the alarm</string>
 
     <string name="trigger_states_title">Triggering mode</string>
 
@@ -80,6 +80,10 @@
     <string name="mvtdesc">Trigger the alarm when the phone is beeing moved after a given time</string>
     <string name="distdesc">Trigger the alarm when the phone is beeing taken away of a given area</string>
     <string name="cabledesc">Trigger the alarm when the cable is unplugged</string>
+    <string name="pref_alarm">Alarm</string>
+    <string name="time_alarm_trigger">Trigger alarm sound</string>
+    <string name="pref_title_time_alarm">Trigger alarm sound</string>
+    <string name="pref_summary_time_alarm">Time before triggering the alarm sound</string>
     <string name="time_mvt">Time before activation</string>
 
 </resources>

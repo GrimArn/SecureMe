@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+        >
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:layout_weight="1" android:layout_marginLeft="24dp" android:layout_marginRight="24dp">
+
+        <fr.ihm.secureme.views.MinMaxNumberPicker
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/numberPicker"
+                max="5"
+                min="0" />
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:gravity="right"
+            android:paddingTop="8dp" android:paddingBottom="8dp" android:layout_marginLeft="24dp">
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" android:layout_gravity="right" android:gravity="right">
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Annuler"
+                    android:id="@+id/negative_button" android:layout_gravity="right"
+                    android:layout_marginRight="8dp" style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"/>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Definir"
+                    android:id="@+id/positive_button"
+                    android:layout_gravity="right"
+                    android:layout_marginRight="8dp" style="?android:attr/borderlessButtonStyle"
+                    android:textColor="@color/colorAccent"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

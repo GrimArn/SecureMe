@@ -6,6 +6,7 @@ import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
@@ -18,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import fr.ihm.secureme.R;
+import fr.ihm.secureme.manager.SoundAlarmManager;
+import fr.ihm.secureme.tools.Constants;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -27,6 +30,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
     RelativeLayout mActivityBackground;
     Vibrator mVibrator;
+    SoundAlarmManager mSoundAlarmManager;
 
     Timer mTimerChangingColor;
     private TextView mCodeField;
@@ -63,17 +67,49 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_alarm);
-        Timer timer = new Timer();
         init();
     }
 
     private void init() {
         mState = State.RED;
-        initVibrate();
+        initPhysicalAlarm();
         initViews();
         initLight();
         initButtons();
         initTimer();
+    }
+
+    private void initPhysicalAlarm() {
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        initVibrate();
+                        initSound();
+                    }
+                });
+
+            }
+        }, 3000);
+    }
+
+    private void initSound() {
+
+        //Mise du son au max
+        if (!Constants.IS_ENVIRONMENT_QUIET) {
+            AudioManager am =
+                    (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            am.setStreamVolume(
+                    AudioManager.STREAM_MUSIC,
+                    am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+                    0);
+        }
+        //Création de l'alarme sonore
+        mSoundAlarmManager = new SoundAlarmManager(this);
+        mSoundAlarmManager.startAlarm();
+
     }
 
     private void initVibrate(){
@@ -195,6 +231,8 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     private void lightYellow() {
         mActivityBackground.setBackgroundColor(getResources().getColor(R.color.yellow));
     }
+
+
     private void screenUnlocking() {
         mTimerChangingColor.schedule(new TimerTask() {
             @Override
@@ -202,6 +240,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        mSoundAlarmManager.stopAlarm();
                         finish();
                     }
                 });
@@ -271,16 +310,9 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP){
-            Toast.makeText(this, "Volume Up", Toast.LENGTH_LONG).show();
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
             return true;
         }
-
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN){
-            Toast.makeText(this, "Volume Down", Toast.LENGTH_LONG).show();
-            return true;
-        }
-
         return super.onKeyDown(keyCode, event);
     }
 }

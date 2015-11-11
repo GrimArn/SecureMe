@@ -73,4 +73,8 @@
     <string name="distdesc">Déclence l\'alarme si le téléphone s\'éloigne d\'une distance définie de la position initiale</string>
     <string name="cabledesc">Déclence l\'alarme quand le cable du téléphone est débranché</string>
     <string name="time_mvt">Temps avant activation</string>
+    <string name="time_alarm_trigger">Déclanchement alarme sonore</string>
+    <string name="pref_alarm">Alarme</string>
+    <string name="pref_summary_time_alarm">Temps de déclanchement de l\'alarme sonore</string>
+    <string name="pref_title_time_alarm">Déclenchement alarme sonore</string>
 </resources>

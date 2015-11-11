@@ -17,6 +17,9 @@ import android.widget.Switch;
 
 import fr.ihm.secureme.R;
 import fr.ihm.secureme.activity.TriggerActivity;
+import fr.ihm.secureme.services.MotionDetector;
+
+import static com.google.android.gms.cast.CastRemoteDisplayLocalService.startService;
 
 public class AlertFragment extends Fragment implements TitleFragmentInterface{
     private View mFragmentView;

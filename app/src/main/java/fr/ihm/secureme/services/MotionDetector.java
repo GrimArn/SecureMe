@@ -10,8 +10,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.util.FloatMath;
 import android.util.Log;
 
 /**
@@ -22,6 +20,7 @@ public class MotionDetector extends Service implements SensorEventListener{
     private SensorManager sensorMan;
     private Sensor accelerometer;
 
+
     private float[] mGravity;
     private float mAccel;
     private float mAccelCurrent;
@@ -29,6 +28,7 @@ public class MotionDetector extends Service implements SensorEventListener{
     private boolean started=false;
     private boolean detected=false;
     private final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+    private final SharedPreferences.Editor editor = sp.edit();
     private int sensibilite;
 
 
@@ -57,7 +57,6 @@ public class MotionDetector extends Service implements SensorEventListener{
                 catch(InterruptedException ex){
                 }
 
-                // TODO
             }
         };
         Log.e("Thread", "started");
@@ -65,7 +64,6 @@ public class MotionDetector extends Service implements SensorEventListener{
 
     }
 
-    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -89,6 +87,11 @@ public class MotionDetector extends Service implements SensorEventListener{
                 // motion you want to detect
                 if (mAccel > sensibilite) {
                     Log.e("Motion detected", mAccel + "");
+                    Intent i = new Intent();
+                    i.setClassName("fr.ihm.secureme", "fr.ihm.secureme.activity.AlarmActivity");
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getBaseContext().startActivity(i);
+                    editor.putBoolean("mode_mvt",false);
                     stopSelf();
                     detected = true;
                 }

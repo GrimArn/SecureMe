@@ -80,5 +80,6 @@
     <string name="mvtdesc">Trigger the alarm when the phone is beeing moved after a given time</string>
     <string name="distdesc">Trigger the alarm when the phone is beeing taken away of a given area</string>
     <string name="cabledesc">Trigger the alarm when the cable is unplugged</string>
+    <string name="time_mvt">Time before activation</string>
 
 </resources>

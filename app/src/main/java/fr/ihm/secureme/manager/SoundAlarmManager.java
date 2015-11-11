@@ -2,7 +2,9 @@ package fr.ihm.secureme.manager;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.widget.Toast;
 import fr.ihm.secureme.R;
+import fr.ihm.secureme.tools.Constants;
 
 /**
  * Created by nonau on 30/10/15.
@@ -19,16 +21,27 @@ public class SoundAlarmManager {
     }
 
     public void startAlarm() {
-        mMediaPlayer = MediaPlayer.create(mContext, R.raw.alarm);
-        mMediaPlayer.start();
-        mMediaPlayer.setLooping(true);
-        isSoundPlaying = true;
+        if (!Constants.IS_ENVIRONMENT_QUIET) {
+            mMediaPlayer = MediaPlayer.create(mContext, R.raw.alarm);
+            mMediaPlayer.start();
+            mMediaPlayer.setLooping(true);
+            isSoundPlaying = true;
+            //Toast.makeText(mContext, "AlarmStartFOREAL", Toast.LENGTH_LONG).show();
+        }  else {
+            Toast.makeText(mContext, "AlarmStart", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void stopAlarm(){
-        if (isSoundPlaying) {
-            mMediaPlayer.stop();
-            isSoundPlaying = true;
+        if (!Constants.IS_ENVIRONMENT_QUIET) {
+            if (isSoundPlaying) {
+                mMediaPlayer.stop();
+                isSoundPlaying = true;
+            }
+            //Toast.makeText(mContext, "AlarmStOPFOREAL", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(mContext, "AlarmStop", Toast.LENGTH_LONG).show();
         }
+
     }
 }

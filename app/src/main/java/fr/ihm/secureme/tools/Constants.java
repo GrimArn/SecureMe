@@ -5,4 +5,5 @@ package fr.ihm.secureme.tools;
  */
 public class Constants {
     public static final String CONTACT_FILE = "contact_file.json";
+    public static final boolean IS_ENVIRONMENT_QUIET = true;
 }

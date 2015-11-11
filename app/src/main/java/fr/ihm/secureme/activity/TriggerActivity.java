@@ -22,6 +22,14 @@ public class TriggerActivity extends AppCompatActivity {
     private Switch activator;
     private SharedPreferences.Editor editor;
 
+    enum Mode{
+        MVT,
+        DIST,
+        CABLE,
+        SIM
+    }
+
+
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -169,10 +177,4 @@ public class TriggerActivity extends AppCompatActivity {
     }
 }
 
-enum Mode{
-    MVT,
-    DIST,
-    CABLE,
-    SIM
-}
 

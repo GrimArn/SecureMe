@@ -12,12 +12,10 @@ import android.os.Bundle;
 import android.os.UserManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.*;
 import fr.ihm.secureme.R;
 import fr.ihm.secureme.callback.ContactFragmentInterface;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
@@ -48,8 +46,6 @@ public class AddContactDialog extends DialogFragment {
     }
 
     public void init (Bundle args) {
-
-
 
         mState = State.EMPTY;
         numTextField = (EditText) mView.findViewById(R.id.num_edittext);
@@ -170,6 +166,18 @@ public class AddContactDialog extends DialogFragment {
                 if (args.getBoolean("isEdit")) {
                     mPositiveDialogButton.setEnabled(true);
                 }
+            }
+        });
+
+        mDialog.setOnKeyListener(new Dialog.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    AddContactDialog.this.getDialog().cancel();
+                    mContactFragmentInterface.dialogCancelHandler();
+                }
+                return true;
             }
         });
 

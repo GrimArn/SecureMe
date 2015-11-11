@@ -96,6 +96,12 @@
                     android:text="@string/time_mvt"
                     android:id="@+id/textView4"
                     android:padding="10dp" />
+                <fr.ihm.secureme.views.MinMaxNumberPicker
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/numberPicker"
+                    max="15"
+                    min="3" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

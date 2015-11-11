@@ -27,13 +27,14 @@ public class MotionDetector extends Service implements SensorEventListener{
     private float mAccelLast;
     private boolean started=false;
     private boolean detected=false;
-    private final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-    private final SharedPreferences.Editor editor = sp.edit();
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
     private int sensibilite;
 
 
     @Override
     public void onCreate() {
+        Log.e("Service", "created");
         super.onCreate(); // if you override onCreate(), make sure to call super().
         sensorMan = (SensorManager)getSystemService(SENSOR_SERVICE);
         accelerometer = sensorMan.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -42,7 +43,9 @@ public class MotionDetector extends Service implements SensorEventListener{
         mAccelLast = SensorManager.GRAVITY_EARTH;
         sensorMan.registerListener(this, accelerometer,
                 SensorManager.SENSOR_DELAY_UI);
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
         sensibilite = (10-(sp.getInt("sensibilite_mouvement",5)))/2;
+        editor = sp.edit();
 
         Thread thread=  new Thread(){
             @Override
@@ -51,6 +54,7 @@ public class MotionDetector extends Service implements SensorEventListener{
                     synchronized(this){
                         wait(sp.getInt("trig_time_mvt", 3) * 1000); // à modifier en fonction du temps
                         Log.e("Thread", "ended");
+                        Log.e("Sensibility", sensibilite+"");
                         started=true;
                     }
                 }

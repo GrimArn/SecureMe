@@ -114,7 +114,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
 
     private void initVibrate(){
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        long[] pattern = {100, 300};
+        long[] pattern = {100, 3000};
         mVibrator.vibrate(pattern, 0);
     }
 

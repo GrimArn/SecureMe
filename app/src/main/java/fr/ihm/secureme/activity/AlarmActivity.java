@@ -86,8 +86,10 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        initVibrate();
-                        initSound();
+                        if (mState!=State.UNLOCKED) {
+                            initVibrate();
+                            initSound();
+                        }
                     }
                 });
 
@@ -160,7 +162,9 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                 tickTimer();
                 break;
             case UNLOCKED:
-                mVibrator.cancel();
+                if (mVibrator!=null) {
+                    mVibrator.cancel();
+                }
                 lightGreen();
                 screenUnlocking();
                 break;
@@ -240,7 +244,9 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mSoundAlarmManager.stopAlarm();
+                        if (mSoundAlarmManager!=null) {
+                            mSoundAlarmManager.stopAlarm();
+                        }
                         finish();
                     }
                 });

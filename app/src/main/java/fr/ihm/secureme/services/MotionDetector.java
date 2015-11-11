@@ -1,6 +1,5 @@
 package fr.ihm.secureme.services;
 
-import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,7 +54,12 @@ public class MotionDetector extends Service implements SensorEventListener{
                         wait(sp.getInt("trig_time_mvt", 3) * 1000); // à modifier en fonction du temps
                         Log.e("Thread", "ended");
                         Log.e("Sensibility", sensibilite+"");
-                        started=true;
+                        if(sp.getBoolean("mode_mvt",false)){
+                            started = true;
+                        }
+                        else {
+                            stopSelf();
+                        }
                     }
                 }
                 catch(InterruptedException ex){
@@ -96,6 +100,7 @@ public class MotionDetector extends Service implements SensorEventListener{
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     getBaseContext().startActivity(i);
                     editor.putBoolean("mode_mvt",false);
+                    editor.commit();
                     stopSelf();
                     detected = true;
                 }

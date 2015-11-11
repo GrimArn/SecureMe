@@ -85,5 +85,8 @@
     <string name="pref_title_time_alarm">Trigger alarm sound</string>
     <string name="pref_summary_time_alarm">Time before triggering the alarm sound</string>
     <string name="time_mvt">Time before activation</string>
+    <string name="unit_sec">second</string>
+    <string name="unit_sec_plu">seconds</string>
+    <string name="req_dist">Required distance to trigger the alarm</string>
 
 </resources>

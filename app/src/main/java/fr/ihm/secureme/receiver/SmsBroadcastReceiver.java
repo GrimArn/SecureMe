@@ -43,7 +43,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver{
                         if (c.getFormatedNum().equals(phoneNumber) && c.getMessage().equals(message)) {
                             if (c.isGps()) {
                                 LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-                                String locationProvider = LocationManager.NETWORK_PROVIDER;
+                                String locationProvider = LocationManager.GPS_PROVIDER;
                                 Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
                                 SmsManager smsManager = SmsManager.getDefault();
                                 double lat = lastKnownLocation.getLatitude();

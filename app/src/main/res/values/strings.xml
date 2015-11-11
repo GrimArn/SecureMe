@@ -80,4 +80,6 @@
     <string name="unit_sec">seconde</string>
     <string name="unit_sec_plu">secondes</string>
     <string name="req_dist">Distance requise pour le déclenchement de l\'alarme</string>
+    <string name="loc_detection">Détection de la localisation</string>
+    <string name="loc_found">Localisation déterminée</string>
 </resources>

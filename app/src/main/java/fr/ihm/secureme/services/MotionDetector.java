@@ -7,9 +7,12 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by pierrebonhoure on 10/11/2015.
@@ -18,6 +21,7 @@ public class MotionDetector extends Service implements SensorEventListener{
     // Start with some variables
     private SensorManager sensorMan;
     private Sensor accelerometer;
+    private Handler handler;
 
 
     private float[] mGravity;
@@ -30,6 +34,9 @@ public class MotionDetector extends Service implements SensorEventListener{
     private SharedPreferences.Editor editor;
     private int sensibilite;
 
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_NOT_STICKY;
+    }
 
     @Override
     public void onCreate() {
@@ -45,15 +52,20 @@ public class MotionDetector extends Service implements SensorEventListener{
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         sensibilite = (10-(sp.getInt("sensibilite_mouvement",5)))/2;
         editor = sp.edit();
+        handler= new Handler();
 
         Thread thread=  new Thread(){
             @Override
             public void run(){
                 try {
                     synchronized(this){
-                        wait(sp.getInt("trig_time_mvt", 3) * 1000); // à modifier en fonction du temps
-                        Log.e("Thread", "ended");
-                        Log.e("Sensibility", sensibilite+"");
+                        Looper.prepare();
+                        for (int i=sp.getInt("trig_time_mvt", 3); i>0 ; i=i-2 ){
+                            wait(2000);
+                            toastThis(i + " sec");
+                        }
+                        Log.d("Thread", "ended");
+                        Log.d("Sensibility", sensibilite+"");
                         if(sp.getBoolean("mode_mvt",false)){
                             started = true;
                         }
@@ -67,9 +79,18 @@ public class MotionDetector extends Service implements SensorEventListener{
 
             }
         };
-        Log.e("Thread", "started");
+        Log.d("Thread", "started");
         thread.start();
 
+    }
+    private void toastThis(final String str) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MotionDetector.this, str, Toast.LENGTH_SHORT).show();
+            }
+        });
+        Log.d("toast","toasting");
     }
 
     @Override
@@ -94,7 +115,7 @@ public class MotionDetector extends Service implements SensorEventListener{
                 // Make this higher or lower according to how much
                 // motion you want to detect
                 if (mAccel > sensibilite) {
-                    Log.e("Motion detected", mAccel + "");
+                    Log.d("Motion detected", mAccel + "");
                     Intent i = new Intent();
                     i.setClassName("fr.ihm.secureme", "fr.ihm.secureme.activity.AlarmActivity");
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

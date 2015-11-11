@@ -49,21 +49,24 @@ public class SettingsFragment extends PreferenceFragment implements TitleFragmen
 
     @Override
     public void onPause() {
-        Toast.makeText(getActivity(), "AlarmStop", Toast.LENGTH_LONG).show();
         super.onPause();
     }
 
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        setPreferenceSummary();
+        if(isAdded()) {
+            setPreferenceSummary();
+        }
     }
 
     private void setPreferenceSummary() {
-        EditTextPreference num =  (EditTextPreference) findPreference("pref_key_emer_num");
-        num.setSummary(sharedPreferences.getString("pref_key_emer_num", getResources().getString(R.string.pref_summary_emer_num)));
+        if(isAdded()) {
+            EditTextPreference num = (EditTextPreference) findPreference("pref_key_emer_num");
+            num.setSummary(sharedPreferences.getString("pref_key_emer_num", getResources().getString(R.string.pref_summary_emer_num)));
 
-        EditTextPreference text =  (EditTextPreference) findPreference("pref_key_emer_text");
-        text.setSummary(sharedPreferences.getString("pref_key_emer_text",getResources().getString(R.string.pref_summary_emer_text)));
+            EditTextPreference text = (EditTextPreference) findPreference("pref_key_emer_text");
+            text.setSummary(sharedPreferences.getString("pref_key_emer_text", getResources().getString(R.string.pref_summary_emer_text)));
+        }
     }
 }

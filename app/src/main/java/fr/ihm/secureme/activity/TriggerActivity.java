@@ -14,8 +14,10 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import fr.ihm.secureme.R;
+import fr.ihm.secureme.services.LocationDetector;
 import fr.ihm.secureme.services.MotionDetector;
 
 /**
@@ -114,6 +116,8 @@ public class TriggerActivity extends AppCompatActivity {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked){//activation
                             editor.putBoolean("mode_dist", true);
+                            startService(new Intent(getApplicationContext(), LocationDetector.class));
+                            Toast.makeText(getApplicationContext(), getString(R.string.loc_detection), Toast.LENGTH_SHORT).show();
                             editor.commit();
                         }else{ //désactivation
                             editor.putBoolean("mode_dist", false);

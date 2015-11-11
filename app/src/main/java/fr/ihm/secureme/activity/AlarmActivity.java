@@ -77,6 +77,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         initLight();
         initButtons();
         initTimer();
+        initVibrate();
     }
 
     private void initPhysicalAlarm() {
@@ -87,7 +88,6 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void run() {
                         if (mState!=State.UNLOCKED) {
-                            initVibrate();
                             initSound();
                         }
                     }

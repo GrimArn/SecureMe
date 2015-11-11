@@ -15,12 +15,9 @@ import fr.ihm.secureme.fragment.SettingsFragment;
 import fr.ihm.secureme.fragment.TitleFragmentInterface;
 import fr.ihm.secureme.google.IconSlidingTabLayout;
 import fr.ihm.secureme.services.LocationDetector;
-import fr.ihm.secureme.services.MotionDetector;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.google.android.gms.cast.CastRemoteDisplayLocalService.startService;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -47,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
         mListFragment.add(new AlertFragment());
         mListFragment.add(new ContactFragment());
         mListFragment.add(new SettingsFragment());
-        Log.e("service","should start");
-        startService(new Intent(this, LocationDetector.class));
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(this,getSupportFragmentManager(),imageResId,Numboftabs);

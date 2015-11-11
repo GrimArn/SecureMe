@@ -15,9 +15,11 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import fr.ihm.secureme.R;
 import fr.ihm.secureme.activity.TriggerActivity;
+import fr.ihm.secureme.services.LocationDetector;
 import fr.ihm.secureme.services.MotionDetector;
 
 import static com.google.android.gms.cast.CastRemoteDisplayLocalService.startService;
@@ -132,6 +134,8 @@ public class AlertFragment extends Fragment implements TitleFragmentInterface{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {//activation
                     editor.putBoolean("mode_dist", true);
+                    getActivity().startService(new Intent(getContext(), LocationDetector.class));
+                    Toast.makeText(getContext(), getString(R.string.loc_detection), Toast.LENGTH_SHORT).show();
                     editor.commit();
                 } else { //désactivation
                     editor.putBoolean("mode_dist", false);

@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent" android:layout_gravity="left" android:gravity="left">
             <Button style="?android:attr/borderlessButtonStyle" android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" android:text="EFFACER" android:id="@+id/clear_button"
+                    android:layout_height="wrap_content" android:text="@string/clear_text" android:id="@+id/clear_button"
                     android:layout_gravity="right" android:layout_marginRight="8dp"
                     android:textColor="@color/colorAccent"/>
         </LinearLayout>
@@ -122,14 +122,14 @@
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Annuler"
+                    android:text="@string/cancel_text"
                     android:id="@+id/negative_button" android:layout_gravity="right"
                     android:layout_marginRight="8dp" style="?android:attr/borderlessButtonStyle"
                     android:textColor="@color/colorAccent"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Definir"
+                    android:text="@string/define"
                     android:id="@+id/positive_button"
                     android:layout_gravity="right"
                     android:layout_marginRight="8dp" style="?android:attr/borderlessButtonStyle"

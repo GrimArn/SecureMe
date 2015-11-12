@@ -113,4 +113,11 @@
     <string name="loc_detection">Detecting the localisation</string>
 
     <string name="loc_found">Localisation found</string>
+    <string name="clear_text">clear</string>
+    <string name="close_text">close</string>
+    <string name="code_changed">Pin saved</string>
+    <string name="code_changed_text">Your pin has been saved</string>
+    <string name="error">Error</string>
+    <string name="wrong_code">Wrong pin !</string>
+    <string name="ok">Enter</string>
 </resources>

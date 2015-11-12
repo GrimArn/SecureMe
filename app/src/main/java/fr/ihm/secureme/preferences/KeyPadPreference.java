@@ -67,10 +67,10 @@ public class KeyPadPreference extends Preference implements KeyPadDialogCallBack
         if (mFirstCode.equals(mConfirmCode)) {
             saveCode();
             AlertDialog errorDialog = new AlertDialog.Builder(getContext())
-                    .setTitle("Code changé")
+                    .setTitle(getContext().getString(R.string.code_changed))
                     .setIcon(R.drawable.ic_check_circle_black_24dp)
-                    .setMessage("Votre nouveau code est enregistré")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    .setMessage(getContext().getString(R.string.code_changed_text))
+                    .setPositiveButton(getContext().getString(R.string.OK), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -82,10 +82,10 @@ public class KeyPadPreference extends Preference implements KeyPadDialogCallBack
         }
         else {
             AlertDialog errorDialog = new AlertDialog.Builder(getContext())
-                    .setTitle("Erreur")
+                    .setTitle(getContext().getString(R.string.error_title))
                     .setIcon(R.drawable.ic_error_black_24dp)
-                    .setMessage("Les deux codes ne correspondent pas")
-                    .setPositiveButton("Recommencer", new DialogInterface.OnClickListener() {
+                    .setMessage(getContext().getString(R.string.error_not_same_code_message))
+                    .setPositiveButton(getContext().getString(R.string.try_again_message), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             CreateCodeKeyPadDialog keyPadDialog = new CreateCodeKeyPadDialog(getContext(), KeyPadPreference.this);
@@ -93,7 +93,7 @@ public class KeyPadPreference extends Preference implements KeyPadDialogCallBack
                             dialog.dismiss();
                         }
                     })
-                    .setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(getContext().getString(R.string.cancel_text), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -111,10 +111,10 @@ public class KeyPadPreference extends Preference implements KeyPadDialogCallBack
             keyPadDialog.show();
         } else {
             AlertDialog errorDialog = new AlertDialog.Builder(getContext())
-                    .setTitle("Erreur")
+                    .setTitle(getContext().getString(R.string.error_title))
                     .setIcon(R.drawable.ic_error_black_24dp)
-                    .setMessage("Le code est incorrect")
-                    .setPositiveButton("FERMER", new DialogInterface.OnClickListener() {
+                    .setMessage(getContext().getString(R.string.wrong_code))
+                    .setPositiveButton(getContext().getString(R.string.close_text), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();

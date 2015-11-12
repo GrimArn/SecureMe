@@ -31,7 +31,7 @@
     <string name="confirm_text">Valider</string>
     <string name="confirm_code_text">Confirmer code</string>
     <string name="enter_code">Entrer votre code</string>
-    <string name="ok" translatable="false">VALIDER</string>
+    <string name="ok">VALIDER</string>
     <string name="define_code_text">Definir code de sécurité</string>
     <string name="define">Definir</string>
     <string name="title_activity_splash_screen" translatable="false">SplashScreenActivity</string>
@@ -82,4 +82,10 @@
     <string name="req_dist">Distance requise pour le déclenchement de l\'alarme</string>
     <string name="loc_detection">Détection de la localisation</string>
     <string name="loc_found">Localisation déterminée</string>
+    <string name="clear_text">effacer</string>
+    <string name="code_changed">Code changé</string>
+    <string name="code_changed_text">Votre nouveau code est enregistré</string>
+    <string name="error">Erreur</string>
+    <string name="wrong_code">Mauvais code !</string>
+    <string name="close_text">fermer</string>
 </resources>

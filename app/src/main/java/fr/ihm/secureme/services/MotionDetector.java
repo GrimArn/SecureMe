@@ -61,8 +61,12 @@ public class MotionDetector extends Service implements SensorEventListener{
                     synchronized(this){
                         Looper.prepare();
                         for (int i=sp.getInt("trig_time_mvt", 3); i>0 ; i=i-2 ){
-                            wait(2000);
-                            toastThis(i + " sec");
+                            if(sp.getBoolean("mode_mvt",false)) {
+                                toastThis(i + " sec");
+                                wait(2000);
+                            }else{
+                                stopSelf();
+                            }
                         }
                         Log.d("Thread", "ended");
                         Log.d("Sensibility", sensibilite+"");

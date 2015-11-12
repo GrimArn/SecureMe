@@ -1,11 +1,8 @@
 package fr.ihm.secureme.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,21 +14,10 @@ import fr.ihm.secureme.fragment.ContactFragment;
 import fr.ihm.secureme.fragment.SettingsFragment;
 import fr.ihm.secureme.fragment.TitleFragmentInterface;
 import fr.ihm.secureme.google.IconSlidingTabLayout;
-import fr.ihm.secureme.google.SlidingTabLayout;
-import fr.ihm.secureme.json.ContactJsonWriter;
-import fr.ihm.secureme.model.Contact;
-import fr.ihm.secureme.model.ContactListSingleton;
-import fr.ihm.secureme.services.MotionDetector;
-import fr.ihm.secureme.tools.Constants;
+import fr.ihm.secureme.services.LocationDetector;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.google.android.gms.cast.CastRemoteDisplayLocalService.startService;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -58,8 +44,6 @@ public class MainActivity extends AppCompatActivity {
         mListFragment.add(new AlertFragment());
         mListFragment.add(new ContactFragment());
         mListFragment.add(new SettingsFragment());
-        startService(new Intent(this, MotionDetector.class));
-        Log.e("Service","Launched");
 
         // Creating The ViewPagerAdapter and Passing Fragment Manager, Titles fot the Tabs and Number Of Tabs.
         adapter =  new ViewPagerAdapter(this,getSupportFragmentManager(),imageResId,Numboftabs);

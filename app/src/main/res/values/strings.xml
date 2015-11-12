@@ -77,4 +77,9 @@
     <string name="pref_alarm">Alarme</string>
     <string name="pref_summary_time_alarm">Temps de déclenchement de l\'alarme sonore</string>
     <string name="pref_title_time_alarm">Déclenchement alarme sonore</string>
+    <string name="unit_sec">seconde</string>
+    <string name="unit_sec_plu">secondes</string>
+    <string name="req_dist">Distance requise pour le déclenchement de l\'alarme</string>
+    <string name="loc_detection">Détection de la localisation</string>
+    <string name="loc_found">Localisation déterminée</string>
 </resources>

@@ -8,11 +8,17 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import fr.ihm.secureme.R;
+import fr.ihm.secureme.services.LocationDetector;
+import fr.ihm.secureme.services.MotionDetector;
 
 /**
  * Created by pierrebonhoure on 04/11/2015.
@@ -21,6 +27,8 @@ public class TriggerActivity extends AppCompatActivity {
     private Mode mode;
     private Switch activator;
     private SharedPreferences.Editor editor;
+    private TextView textConfOne;
+    private View confOne;
 
     enum Mode{
         MVT,
@@ -29,12 +37,25 @@ public class TriggerActivity extends AppCompatActivity {
         SIM
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setup();
+    }
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
+        super.onCreate(savedInstanceState);
+        return;
+    }
+
+    private void setup() {
+
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
-        super.onCreate(savedInstanceState);
+
         Intent intent = getIntent();
         if (intent != null) {
             String extra_mode = intent.getStringExtra("EXTRA_mode");
@@ -75,11 +96,18 @@ public class TriggerActivity extends AppCompatActivity {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked){//activation
                             editor.putBoolean("mode_mvt", true);
+                            startService(new Intent(getApplicationContext(), MotionDetector.class));
                             editor.commit();
                         }else{ //désactivation
                             editor.putBoolean("mode_mvt", false);
                             editor.commit();
                         }
+                    }
+                });
+                confOne.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //afficher la dialog pour faire la teuf
                     }
                 });
                 break;
@@ -88,11 +116,19 @@ public class TriggerActivity extends AppCompatActivity {
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked){//activation
                             editor.putBoolean("mode_dist", true);
+                            startService(new Intent(getApplicationContext(), LocationDetector.class));
+                            Toast.makeText(getApplicationContext(), getString(R.string.loc_detection), Toast.LENGTH_SHORT).show();
                             editor.commit();
                         }else{ //désactivation
                             editor.putBoolean("mode_dist", false);
                             editor.commit();
                         }
+                    }
+                });
+                confOne.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //afficher la dialog pour faire la teuf
                     }
                 });
                 break;
@@ -131,11 +167,19 @@ public class TriggerActivity extends AppCompatActivity {
     private void initView() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         switch(mode){
-            case MVT :
+            case MVT:
                 setContentView(R.layout.activity_mvt);
                 getSupportActionBar().setTitle(getString(R.string.mouvement));
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 activator= (Switch) findViewById(R.id.activate);
+                confOne= (View) findViewById(R.id.timer_mvt);
+                textConfOne = (TextView) findViewById(R.id.text_timer_mvt);
+                if(sp.getInt("trig_time_mvt",3)>0){
+                    textConfOne.setText("" + sp.getInt("trig_time_mvt", 3) +" " +getString(R.string.unit_sec_plu));
+                }
+                else{
+                    textConfOne.setText(""+sp.getInt("trig_time_mvt",3)+" "+getString(R.string.unit_sec));
+                }
                 if(sp.getBoolean("mode_mvt",false)){
                     activator.setChecked(true);
                 }
@@ -145,6 +189,10 @@ public class TriggerActivity extends AppCompatActivity {
                 getSupportActionBar().setTitle(getString(R.string.distance));
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 activator= (Switch) findViewById(R.id.activate);
+                confOne= (View) findViewById(R.id.dist_req);
+                textConfOne = (TextView) findViewById(R.id.text_dist_req);
+                textConfOne.setText("" + sp.getInt("trig_time_mvt",3) +" km");
+
                 if(sp.getBoolean("mode_dist",false)){
                     activator.setChecked(true);
                 }

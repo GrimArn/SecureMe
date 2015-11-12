@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,11 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import fr.ihm.secureme.R;
 import fr.ihm.secureme.activity.TriggerActivity;
+import fr.ihm.secureme.services.LocationDetector;
 import fr.ihm.secureme.services.MotionDetector;
 
 import static com.google.android.gms.cast.CastRemoteDisplayLocalService.startService;
@@ -131,6 +134,8 @@ public class AlertFragment extends Fragment implements TitleFragmentInterface{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {//activation
                     editor.putBoolean("mode_dist", true);
+                    getActivity().startService(new Intent(getContext(), LocationDetector.class));
+                    Toast.makeText(getContext(), getString(R.string.loc_detection), Toast.LENGTH_SHORT).show();
                     editor.commit();
                 } else { //désactivation
                     editor.putBoolean("mode_dist", false);
@@ -143,6 +148,7 @@ public class AlertFragment extends Fragment implements TitleFragmentInterface{
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {//activation
                     editor.putBoolean("mode_mvt", true);
+                    getActivity().startService(new Intent(getActivity(), MotionDetector.class));
                     editor.commit();
                 } else { //désactivation
                     editor.putBoolean("mode_mvt", false);
@@ -155,6 +161,7 @@ public class AlertFragment extends Fragment implements TitleFragmentInterface{
     }
 
     private void updateView() {
+        Log.e("update", "started");
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getContext());
         if(sp.getBoolean("mode_sim",false)){
             swsim.setChecked(true);

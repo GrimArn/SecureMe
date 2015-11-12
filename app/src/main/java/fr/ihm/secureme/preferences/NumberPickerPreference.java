@@ -18,14 +18,17 @@ public class NumberPickerPreference extends Preference implements NumberPickerCa
 
     public NumberPickerPreference(Context context) {
         super(context);
+        mContext = context;
     }
 
     public NumberPickerPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        mContext = context;
     }
 
     public NumberPickerPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class NumberPickerPreference extends Preference implements NumberPickerCa
         Log.e("PREF", getKey());
         mCurrentNumber = getSharedPreferences().getInt(getKey(), 0);
         NumberPickerDialog numberPickerDialog = new NumberPickerDialog(getContext(), this, mCurrentNumber, 0, 5);
-        setTitle(mContext.getResources().getString(R.string.time_alarm_trigger));
+        numberPickerDialog.setTitle(mContext.getResources().getString(R.string.time_alarm_trigger));
         numberPickerDialog.show();
     }
 

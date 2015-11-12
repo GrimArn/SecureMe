@@ -17,7 +17,6 @@ import android.view.*;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import fr.ihm.secureme.R;
 import fr.ihm.secureme.manager.SoundAlarmManager;
 import fr.ihm.secureme.tools.Constants;
@@ -81,6 +80,9 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void initPhysicalAlarm() {
+
+        int time = PreferenceManager.getDefaultSharedPreferences(this).getInt("pref_time_alarm", 3);
+        Log.e("AlarmActivity", time +"");
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
@@ -94,7 +96,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
                 });
 
             }
-        }, 3000);
+        }, time * 1000);
     }
 
     private void initSound() {

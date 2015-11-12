@@ -2,6 +2,7 @@ package fr.ihm.secureme.views;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.NumberPicker;
@@ -27,4 +28,10 @@ public class MinMaxNumberPicker extends NumberPicker {
         this.setMinValue(attrs.getAttributeIntValue(null, "min", 0));
         this.setMaxValue(attrs.getAttributeIntValue(null, "max", 0));
     }
+
+    public void setAttributeSet (int min, int max) {
+        this.setMinValue(min);
+        this.setMaxValue(max);
+    }
+
 }

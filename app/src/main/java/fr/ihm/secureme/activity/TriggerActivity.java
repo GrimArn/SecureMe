@@ -17,18 +17,44 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import fr.ihm.secureme.R;
+import fr.ihm.secureme.callback.NumberPickerCallBack;
+import fr.ihm.secureme.dialog.NumberPickerDialog;
 import fr.ihm.secureme.services.LocationDetector;
 import fr.ihm.secureme.services.MotionDetector;
+import fr.ihm.secureme.views.MinMaxNumberPicker;
 
 /**
  * Created by pierrebonhoure on 04/11/2015.
  */
-public class TriggerActivity extends AppCompatActivity {
+public class TriggerActivity extends AppCompatActivity implements NumberPickerCallBack{
     private Mode mode;
     private Switch activator;
     private SharedPreferences.Editor editor;
     private TextView textConfOne;
     private View confOne;
+    private SharedPreferences mPreferences;
+
+    @Override
+    public void onNumberPicked(int number) {
+        switch (mode) {
+            case DIST:
+                editor.putInt("dist_req", number).commit();
+                break;
+            case MVT:
+                editor.putInt("trig_time_mvt", number).commit();
+                break;
+            case SIM:case CABLE:
+                //Interdit
+                break;
+        }
+        initView();
+        initListener();
+    }
+
+    @Override
+    public void onCancel() {
+
+    }
 
     enum Mode{
         MVT,
@@ -52,9 +78,8 @@ public class TriggerActivity extends AppCompatActivity {
     }
 
     private void setup() {
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = preferences.edit();
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = mPreferences.edit();
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -107,7 +132,10 @@ public class TriggerActivity extends AppCompatActivity {
                 confOne.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //afficher la dialog pour faire la teuf
+                        NumberPickerDialog dialog = new NumberPickerDialog(TriggerActivity.this,
+                                TriggerActivity.this, mPreferences.getInt("trig_time_mvt", 3), 3, 15);
+                        dialog.setTitle(getResources().getString(R.string.time_mvt));
+                        dialog.show();
                     }
                 });
                 break;
@@ -128,7 +156,10 @@ public class TriggerActivity extends AppCompatActivity {
                 confOne.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //afficher la dialog pour faire la teuf
+                        NumberPickerDialog dialog = new NumberPickerDialog(TriggerActivity.this, TriggerActivity.this, mPreferences.getInt("dist_req", 3), 1,50);
+                        dialog.setTitle(getResources().getString(R.string.distance));
+                        dialog.show();
+
                     }
                 });
                 break;
@@ -191,7 +222,7 @@ public class TriggerActivity extends AppCompatActivity {
                 activator= (Switch) findViewById(R.id.activate);
                 confOne= (View) findViewById(R.id.dist_req);
                 textConfOne = (TextView) findViewById(R.id.text_dist_req);
-                textConfOne.setText("" + sp.getInt("trig_time_mvt",3) +" km");
+                textConfOne.setText("" + sp.getInt("dist_req",3) +" km");
 
                 if(sp.getBoolean("mode_dist",false)){
                     activator.setChecked(true);

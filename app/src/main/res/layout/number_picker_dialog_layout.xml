@@ -15,7 +15,7 @@
         <fr.ihm.secureme.views.MinMaxNumberPicker
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/numberPicker"
+                android:id="@+id/number_picker_min_max"
                 max="5"
                 min="0" />
     </LinearLayout>
@@ -31,14 +31,14 @@
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Annuler"
+                    android:text="@string/cancel_text"
                     android:id="@+id/negative_button" android:layout_gravity="right"
                     android:layout_marginRight="8dp" style="?android:attr/borderlessButtonStyle"
                     android:textColor="@color/colorAccent"/>
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Definir"
+                    android:text="@string/define"
                     android:id="@+id/positive_button"
                     android:layout_gravity="right"
                     android:layout_marginRight="8dp" style="?android:attr/borderlessButtonStyle"

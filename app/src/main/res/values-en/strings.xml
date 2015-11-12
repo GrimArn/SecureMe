@@ -67,27 +67,50 @@
     <string name="contact_number_text">Contact number</string>
 
     <string name="emergency_contacts_title">Emergency contacts</string>
+
+
     <string name="add_text">Add</string>
     <string name="an_emergency_contact_text">an emergency contact</string>
+
     <string name="edit_text">Edit</string>
+
     <string name="mouvement">Movement</string>
+
     <string name="sim">Sim Detection</string>
+
     <string name="distance">Distance detection</string>
+
     <string name="cable">Unplugging cable</string>
+
     <string name="simdesc">Trigger the alarm when the Sim-card has been removed or changed</string>
+
     <string name="timersetter">Set the time before the alarm start to ring</string>
+
     <string name="activermode">Activate the mode</string>
+
     <string name="mvtdesc">Trigger the alarm when the phone is beeing moved after a given time</string>
+
     <string name="distdesc">Trigger the alarm when the phone is beeing taken away of a given area</string>
+
     <string name="cabledesc">Trigger the alarm when the cable is unplugged</string>
+
     <string name="pref_alarm">Alarm</string>
+
     <string name="time_alarm_trigger">Trigger alarm sound</string>
+
     <string name="pref_title_time_alarm">Trigger alarm sound</string>
+
     <string name="pref_summary_time_alarm">Time before triggering the alarm sound</string>
+
     <string name="time_mvt">Time before activation</string>
+
     <string name="unit_sec">second</string>
+
     <string name="unit_sec_plu">seconds</string>
+
     <string name="req_dist">Required distance to trigger the alarm</string>
+
     <string name="loc_detection">Detecting the localisation</string>
+
     <string name="loc_found">Localisation found</string>
 </resources>

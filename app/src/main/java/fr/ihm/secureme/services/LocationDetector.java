@@ -70,7 +70,7 @@ public class LocationDetector extends Service {
                             sleep(5000);
                         }
                         Looper.prepare();
-                        while (init.distanceTo(locationManager.getLastKnownLocation(locationProvider)) < sp.getInt("dist_req", 3000)) {
+                        while (init.distanceTo(locationManager.getLastKnownLocation(locationProvider)) < sp.getInt("dist_req", 3)*1000) {
                             sleep(5000);
                             locationManager.requestSingleUpdate(locationProvider, new myListener(), null);
                             Log.e("Distance actuelle", "" + init.distanceTo(locationManager.getLastKnownLocation(locationProvider)));

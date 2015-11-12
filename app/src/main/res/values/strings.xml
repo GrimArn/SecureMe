@@ -5,7 +5,7 @@
     <string name="action_settings">Paramètres</string>
     <string name="title_activity_alarm" translatable="false">AlarmActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="hello_settings_fragment" translatable="false">settings</string>
     <string name="hello_alert_fragment" translatable="false">alert</string>

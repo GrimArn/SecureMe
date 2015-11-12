@@ -22,8 +22,9 @@ import android.widget.Toast;
  */
 public class LocationDetector extends Service {
     private Location init;
+    private Boolean initfound=false;
     private SharedPreferences sp;
-    private Boolean locationupdated=false;
+    private SharedPreferences.Editor editor;
 
     @Nullable
     @Override
@@ -37,7 +38,7 @@ public class LocationDetector extends Service {
 
     @Override
     public void onCreate() {
-        Log.d("Service","started");
+        Log.e("Service", "started");
         final LocationManager locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
         final String locationProvider = LocationManager.GPS_PROVIDER;
         Location lastKnownLocation;
@@ -45,8 +46,10 @@ public class LocationDetector extends Service {
             return;
         }
         sp = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = sp.edit();
         locationManager.requestSingleUpdate(locationProvider, new myListener(), null);
-        Log.d("localisation", "demandée");
+
+        Log.e("localisation", "demandée");
 
 
         Thread thread = new Thread() {
@@ -57,13 +60,14 @@ public class LocationDetector extends Service {
                         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             return;
                         }
-                        while (!locationupdated){
+                        while (!initfound){
                             sleep(5000);
                         }
                         Looper.prepare();
-                        while (init.distanceTo(locationManager.getLastKnownLocation(locationProvider)) < sp.getFloat("dist_req",3000)) {
+                        while (init.distanceTo(locationManager.getLastKnownLocation(locationProvider)) < sp.getInt("dist_req", 3000)) {
                             sleep(5000);
-                            Log.d("Distance actuelle", "" + init.distanceTo(locationManager.getLastKnownLocation(locationProvider)));
+                            locationManager.requestSingleUpdate(locationProvider, new myListener(), null);
+                            Log.e("Distance actuelle", "" + init.distanceTo(locationManager.getLastKnownLocation(locationProvider)));
                         }
                         if(sp.getBoolean("mode_dist",false)) {
                             Intent i = new Intent();
@@ -71,6 +75,7 @@ public class LocationDetector extends Service {
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             getBaseContext().startActivity(i);
                         }
+                        editor.putBoolean("mode_dist",false);
                         stopSelf();
                         }
                 }
@@ -87,10 +92,11 @@ public class LocationDetector extends Service {
 
         @Override
         public void onLocationChanged(Location location) {
-            Toast.makeText(getApplicationContext(), "Location setted", Toast.LENGTH_SHORT).show();
-            locationupdated=true;
+
             Log.d("coordonnées", location.getLatitude() + " / " + location.getLongitude());
-            if (init==null) {
+            if (!initfound) {
+                Toast.makeText(getApplicationContext(), "Location set", Toast.LENGTH_SHORT).show();
+                initfound=true;
                 Log.d("location", "setted");
                 init = location;
             }
